@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		72DDF4A91F66EFCE00B90A5C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4A81F66EFCE00B90A5C /* main.cpp */; };
+		72DDF4B21F68C89200B90A5C /* Longana.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4B01F68C89200B90A5C /* Longana.cpp */; };
+		72DDF4B51F68C94A00B90A5C /* Tournament.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4B31F68C94A00B90A5C /* Tournament.cpp */; };
+		72DDF4B81F68C9DD00B90A5C /* Round.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4B61F68C9DD00B90A5C /* Round.cpp */; };
+		72DDF4BB1F68CA0900B90A5C /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4B91F68CA0900B90A5C /* Player.cpp */; };
+		72DDF4BE1F68CA3400B90A5C /* Human.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4BC1F68CA3400B90A5C /* Human.cpp */; };
+		72DDF4C11F68CA9D00B90A5C /* Computer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4BF1F68CA9D00B90A5C /* Computer.cpp */; };
+		72DDF4C41F68CAD900B90A5C /* Hand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4C21F68CAD900B90A5C /* Hand.cpp */; };
+		72DDF4C71F68CB0700B90A5C /* Stock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4C51F68CB0700B90A5C /* Stock.cpp */; };
+		72DDF4CB1F68DA7500B90A5C /* LayoutView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4C91F68DA7500B90A5C /* LayoutView.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +34,25 @@
 /* Begin PBXFileReference section */
 		72DDF4A51F66EFCE00B90A5C /* Longana */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Longana; sourceTree = BUILT_PRODUCTS_DIR; };
 		72DDF4A81F66EFCE00B90A5C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		72DDF4B01F68C89200B90A5C /* Longana.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Longana.cpp; sourceTree = "<group>"; };
+		72DDF4B11F68C89200B90A5C /* Longana.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Longana.hpp; sourceTree = "<group>"; };
+		72DDF4B31F68C94A00B90A5C /* Tournament.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tournament.cpp; sourceTree = "<group>"; };
+		72DDF4B41F68C94A00B90A5C /* Tournament.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Tournament.hpp; sourceTree = "<group>"; };
+		72DDF4B61F68C9DD00B90A5C /* Round.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Round.cpp; sourceTree = "<group>"; };
+		72DDF4B71F68C9DD00B90A5C /* Round.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Round.hpp; sourceTree = "<group>"; };
+		72DDF4B91F68CA0900B90A5C /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		72DDF4BA1F68CA0900B90A5C /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		72DDF4BC1F68CA3400B90A5C /* Human.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Human.cpp; sourceTree = "<group>"; };
+		72DDF4BD1F68CA3400B90A5C /* Human.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Human.hpp; sourceTree = "<group>"; };
+		72DDF4BF1F68CA9D00B90A5C /* Computer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Computer.cpp; sourceTree = "<group>"; };
+		72DDF4C01F68CA9D00B90A5C /* Computer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Computer.hpp; sourceTree = "<group>"; };
+		72DDF4C21F68CAD900B90A5C /* Hand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hand.cpp; sourceTree = "<group>"; };
+		72DDF4C31F68CAD900B90A5C /* Hand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Hand.hpp; sourceTree = "<group>"; };
+		72DDF4C51F68CB0700B90A5C /* Stock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stock.cpp; sourceTree = "<group>"; };
+		72DDF4C61F68CB0700B90A5C /* Stock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stock.hpp; sourceTree = "<group>"; };
+		72DDF4C81F68CDCC00B90A5C /* GlobalImports.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalImports.h; sourceTree = "<group>"; };
+		72DDF4C91F68DA7500B90A5C /* LayoutView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LayoutView.cpp; sourceTree = "<group>"; };
+		72DDF4CA1F68DA7500B90A5C /* LayoutView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LayoutView.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +86,25 @@
 			isa = PBXGroup;
 			children = (
 				72DDF4A81F66EFCE00B90A5C /* main.cpp */,
+				72DDF4B01F68C89200B90A5C /* Longana.cpp */,
+				72DDF4B11F68C89200B90A5C /* Longana.hpp */,
+				72DDF4B31F68C94A00B90A5C /* Tournament.cpp */,
+				72DDF4B41F68C94A00B90A5C /* Tournament.hpp */,
+				72DDF4B61F68C9DD00B90A5C /* Round.cpp */,
+				72DDF4B71F68C9DD00B90A5C /* Round.hpp */,
+				72DDF4B91F68CA0900B90A5C /* Player.cpp */,
+				72DDF4BA1F68CA0900B90A5C /* Player.hpp */,
+				72DDF4BC1F68CA3400B90A5C /* Human.cpp */,
+				72DDF4BD1F68CA3400B90A5C /* Human.hpp */,
+				72DDF4BF1F68CA9D00B90A5C /* Computer.cpp */,
+				72DDF4C01F68CA9D00B90A5C /* Computer.hpp */,
+				72DDF4C21F68CAD900B90A5C /* Hand.cpp */,
+				72DDF4C31F68CAD900B90A5C /* Hand.hpp */,
+				72DDF4C51F68CB0700B90A5C /* Stock.cpp */,
+				72DDF4C61F68CB0700B90A5C /* Stock.hpp */,
+				72DDF4C81F68CDCC00B90A5C /* GlobalImports.h */,
+				72DDF4C91F68DA7500B90A5C /* LayoutView.cpp */,
+				72DDF4CA1F68DA7500B90A5C /* LayoutView.hpp */,
 			);
 			path = Longana;
 			sourceTree = "<group>";
@@ -119,7 +166,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72DDF4B21F68C89200B90A5C /* Longana.cpp in Sources */,
 				72DDF4A91F66EFCE00B90A5C /* main.cpp in Sources */,
+				72DDF4B81F68C9DD00B90A5C /* Round.cpp in Sources */,
+				72DDF4C11F68CA9D00B90A5C /* Computer.cpp in Sources */,
+				72DDF4C41F68CAD900B90A5C /* Hand.cpp in Sources */,
+				72DDF4B51F68C94A00B90A5C /* Tournament.cpp in Sources */,
+				72DDF4BB1F68CA0900B90A5C /* Player.cpp in Sources */,
+				72DDF4BE1F68CA3400B90A5C /* Human.cpp in Sources */,
+				72DDF4CB1F68DA7500B90A5C /* LayoutView.cpp in Sources */,
+				72DDF4C71F68CB0700B90A5C /* Stock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

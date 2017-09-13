@@ -6,10 +6,9 @@
 //  Copyright © 2017 Bishal Regmi. All rights reserved.
 //
 
-#include <iostream>
+#include "Longana.hpp"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+    Longana longana;
+    longana.start();
 }
