@@ -24,7 +24,6 @@ public:
     inline void addTile(Tile tile) { tiles.push_back(tile); }
     
     void displayHand(){
-        cout<<"Current Hand: "<<endl;
         if(tiles.empty()){
             return;
         }
@@ -32,6 +31,14 @@ public:
             cout<<tiles[i].first<<" - "<< tiles[i].second << "   ";
         }
         cout<<endl;
+    }
+    
+    Tile getTile(int index){
+       return tiles[index];
+    }
+    
+    void playTile(int index){
+        tiles.erase(tiles.begin()+index);
     }
     
 private:

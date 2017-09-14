@@ -25,11 +25,15 @@ public:
     }
     
     void start(){
+        cout<<"Hi! Welcome to Longana!"<<endl;
+        cout<<"Please enter your name: ";
+        string name;
+        cin>>name;
         int score;
         cout<<"Please enter a tournament score: ";
         cin>> score;
         cout<<endl;
-        human = new Human();
+        human = new Human(name);
         computer = new Computer();
         tournament = new Tournament(score, human,computer);
         tournament->start();

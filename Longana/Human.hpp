@@ -14,8 +14,22 @@
 
 class Human:public Player{
 public:
+    Human(){
+        
+    }
     
+    Human(string name){
+        this->name = name;
+    }
+    
+    Tile play(int tileIndex, Side side, const Layout* layout){
+        
+        
+        
+        return tile;
+    }
 private:
+    string name;
     
 };
 

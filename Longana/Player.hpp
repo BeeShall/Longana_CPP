@@ -11,6 +11,7 @@
 
 #include "GlobalImports.h"
 #include "Hand.hpp"
+#include "Layout.hpp"
 
 class Player{
 public:
@@ -28,17 +29,31 @@ public:
         return score;
     }
     
-    void addScore(int score){
-        this->score += score;
+    Tile getTilefromHand(int index)
+    {
+        return this->hand->getTile(index-1);
     }
     
     void displayHand(){
         hand->displayHand();
     }
     
-private:
+    Tile hint(const Layout* layout) const{
+        
+        // TO:DO AI Logic
+        
+        return Tile(-1,-1);
+    }
+    
+    virtual Tile play();
+    
+protected:
     Hand* hand;
     int score;
+    
+    void addScore(int score){
+        this->score += score;
+    }
     
 };
 

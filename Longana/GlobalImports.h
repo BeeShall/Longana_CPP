@@ -17,4 +17,6 @@ using namespace std;
 
 typedef pair<int,int> Tile;
 
+enum Side {LEFT, RIGHT};
+
 #endif /* GlobalImports_h */

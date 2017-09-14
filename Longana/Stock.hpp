@@ -48,6 +48,10 @@ public:
         cout<<endl;
     }
     
+    bool isEmpty(){
+        return stock.size()==0;
+    }
+    
     
     
 private:
