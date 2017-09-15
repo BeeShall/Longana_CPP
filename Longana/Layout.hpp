@@ -10,27 +10,44 @@
 #define Layout_hpp
 
 #include "GlobalImports.h"
-
+#import <utility>
 class Layout{
 public:
-    Layout(){
+    Layout(Tile tile){
+        engine = tile;
         engineSet=false;
+    }
+    
+    Tile getEngine(){
+        return engine;
     }
     
     void setEngine(){
         engineSet=true;
     }
     
-    void placeTile(Tile tile, Side side){
+    //need to implement validation of tiles better
+    bool placeTile(Tile tile, Side side){
         if(engineSet){
-        if(side == LEFT) left.push_back(tile);
-        else if(side == RIGHT) right.push_back(tile);
-        else cout<<"Invalid Side"<<endl;
+            if(side == LEFT){
+                left.push_back(tile);
+                return true;
+            }
+            else if(side == RIGHT){
+               right.push_back(tile);
+                return true;
+            }
+            else{
+                cout<<"Invalid Side"<<endl;
+                return false;
+            }
         }
         else{
             cout<<"The engine hasn't been set yet!"<<endl;
+            return false;
         }
     }
+    
     
     void displayLayout(){
         cout<<"Current Layout: "<<endl;
@@ -42,7 +59,7 @@ public:
             }
             
             //engine
-            cout<<"6 - 6"<< " ";
+            cout<<engine.first<<" - "<< engine.second << "   ";
             
             //right side
             cout<<"R";
@@ -69,7 +86,35 @@ public:
 private:
     vector<Tile> left;
     vector<Tile> right;
+    Tile engine;
     bool engineSet;
+    
+    //tile sent by reference because might need to switch the first and second based on spot
+    bool validateMove(Tile &tile, Side side){
+        if(side== LEFT){
+            Tile temp = left.back();
+            if(temp.first == tile.first){
+                swap(tile.first,tile.second);
+                return true;
+            }
+            else if(temp.first == tile.second) return true;
+            else return false;
+        }
+        else if(side == RIGHT) {
+            Tile temp = right.back();
+            if(temp.second == tile.second){
+                swap(tile.first,tile.second);
+                return true;
+            }
+            else if(temp.second == tile.first) return true;
+            else return false;
+        }
+        else{
+            return false;
+        }
+        
+    }
+    
     
 };
 

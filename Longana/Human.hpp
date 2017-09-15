@@ -22,11 +22,26 @@ public:
         this->name = name;
     }
     
-    Tile play(int tileIndex, Side side, const Layout* layout){
+    inline string getName() {return name;}
+    
+    bool play(int tileIndex, Side side, Layout* layout){
         
-        
-        
-        return tile;
+        //if human is trying to set the engine
+        if(side == ENGINE){
+            hand->playTile(tileIndex);
+            return true;
+        }
+        Tile playedTile = getTilefromHand(tileIndex);
+        //checking if the tile placed by human is a valid one
+        if(layout->placeTile(playedTile, side)){
+            hand->playTile(tileIndex);
+            return true;
+        }
+        return false;
+    }
+    
+    Tile getHint(Layout* layout){
+        return hint(layout);
     }
 private:
     string name;

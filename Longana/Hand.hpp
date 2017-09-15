@@ -37,6 +37,13 @@ public:
        return tiles[index];
     }
     
+    int hasTile(Tile tile){
+        for(int i=0; i<tiles.size(); i++){
+            if(tiles[i]== tile) return i;
+        }
+        return -1;
+    }
+    
     void playTile(int index){
         tiles.erase(tiles.begin()+index);
     }

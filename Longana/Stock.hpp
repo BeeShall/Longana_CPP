@@ -33,7 +33,7 @@ public:
         return new Hand(tiles);
     }
     
-    Tile getTile(){
+    Tile getTileOnTop(){
         Tile temp = stock.back();
         stock.pop_back();
         return temp;

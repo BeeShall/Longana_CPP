@@ -11,7 +11,8 @@
 
 #include <stdio.h>
 #include "Stock.hpp"
-#include "Player.hpp"
+#include "Human.hpp"
+#include "Computer.hpp"
 #include "Layout.hpp"
 
 class Round{
@@ -20,11 +21,11 @@ public:
         
     }
     
-    Round(Player* human, Player* computer){
+    Round(Player* human, Player* computer, int enginePip){
         stock = new Stock();
-        this->human = human;
-        this->computer = computer;
-        layout = new Layout();
+        this->human = (Human*)human;
+        this->computer = (Computer*)computer;
+        layout = new Layout(Tile(enginePip,enginePip));
     }
     
     void start(){
@@ -33,9 +34,16 @@ public:
         computer->setNewHand(stock->generateHand());
         printRoundState();
         
+        determineFirstPlayer();
+        
+        printRoundState();
+        
+        //game ending conditions
+        /*
         while(!stock->isEmpty()){
             
         }
+         */
     }
     
     void printRoundState(){
@@ -50,10 +58,48 @@ public:
     
 private:
     Stock* stock;
-    Player* human;
-    Player* computer;
+    Human* human;
+    Computer* computer;
     Layout* layout;
-    bool turn;
+    bool turn;  //true is user, false is computer
+    
+    void determineFirstPlayer(){
+        Tile engine = layout->getEngine();
+        while(!checkIfPlayerHasEngine(engine)){
+            cout<<"No one has the engine yet! Both players draw from the top! "<<endl;
+            Tile newTile = stock->getTileOnTop();
+            human->addNewTile(newTile);
+            cout<<human->getName()<<" drew "<<newTile.first<< " - "<<newTile.second<<endl;
+            
+            newTile = stock->getTileOnTop();
+            computer->addNewTile(newTile);
+            cout<<"Computer drew "<<newTile.first<< " - "<<newTile.second<<endl;
+            
+            
+        }
+        layout->setEngine();
+    }
+    
+    bool checkIfPlayerHasEngine(Tile engine){
+        int humanIndex = human->hasTile(engine);
+        if(humanIndex>=0){
+            cout<<((Human*)human)->getName()<<" has the engine! "<<endl;
+            human->play(humanIndex, ENGINE, layout);
+            turn = false; //human will place and computers turn
+            return true;
+        }
+        else{
+            int computerIndex =computer->hasTile(engine);
+            if(computerIndex>=0){
+                cout<<"Computer has the engine! "<<endl;
+                computer->playTile(computerIndex);
+                turn = true; //vice versa
+                return true;
+            }
+            else return false;
+
+        }
+    }
 };
 
 #endif /* Round_hpp */

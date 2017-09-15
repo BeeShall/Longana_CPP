@@ -26,8 +26,10 @@ public:
     }
     
     void start(){
+        int engineIndex = 0;
         //while(human->getScore() < tournametScore && computer->getScore() < tournametScore){
-            Round r(human, computer);
+        int enginePip = 6 - engineIndex%6;
+            Round r(human, computer, enginePip);
             r.start();
         //}
         

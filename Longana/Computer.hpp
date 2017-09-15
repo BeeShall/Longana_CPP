@@ -14,6 +14,17 @@
 
 class Computer : public Player{
 public:
+    Computer(){
+        
+    }
+    
+    bool play(const Layout* layout){
+        return true;
+    }
+    
+    void playTile(int tileIndex){
+        hand->playTile(tileIndex);
+    }
     
 private:
     

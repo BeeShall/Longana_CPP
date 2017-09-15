@@ -25,6 +25,10 @@ public:
         this->hand = hand;
     }
     
+    void addNewTile(Tile tile){
+        hand->addTile(tile);
+    }
+    
     int getScore(){
         return score;
     }
@@ -38,14 +42,13 @@ public:
         hand->displayHand();
     }
     
-    Tile hint(const Layout* layout) const{
-        
-        // TO:DO AI Logic
-        
-        return Tile(-1,-1);
+    int hasTile(Tile tile){
+        return hand->hasTile(tile);
     }
     
-    virtual Tile play();
+    
+    
+    virtual bool play(){ return false; }
     
 protected:
     Hand* hand;
@@ -54,6 +57,14 @@ protected:
     void addScore(int score){
         this->score += score;
     }
+    
+    Tile hint(const Layout* layout) const{
+        
+        // TO:DO AI Logic
+        
+        return Tile(-1,-1);
+    }
+    
     
 };
 
