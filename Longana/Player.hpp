@@ -48,7 +48,7 @@ public:
     
     
     
-    virtual bool play(){ return false; }
+    virtual bool play()= 0;
     
 protected:
     Hand* hand;
