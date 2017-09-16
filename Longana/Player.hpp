@@ -23,6 +23,7 @@ public:
     void setNewHand(Hand* hand) {
         delete this->hand;
         this->hand = hand;
+        movesOver = false;
     }
     
     void addNewTile(Tile tile){
@@ -46,13 +47,18 @@ public:
         return hand->hasTile(tile);
     }
     
+    bool hasMoreMoves(){
+        return movesOver;
+    }
     
     
-    virtual bool play()= 0;
+    
+    virtual Move play() { return VALID; };
     
 protected:
     Hand* hand;
     int score;
+    bool movesOver;
     
     void addScore(int score){
         this->score += score;

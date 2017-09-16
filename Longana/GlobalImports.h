@@ -19,4 +19,8 @@ typedef pair<int,int> Tile;
 
 enum Side {LEFT, RIGHT, ENGINE};
 
+enum Move {VALID, INVALID, PASS};
+
+inline bool isTileDouble(Tile tile){ return tile.first == tile.second; };
+
 #endif /* GlobalImports_h */

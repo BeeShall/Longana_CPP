@@ -11,6 +11,8 @@
 
 #include "GlobalImports.h"
 #include "Hand.hpp"
+#include <algorithm>
+#include <random>
 
 class Stock{
 public:
@@ -24,7 +26,8 @@ public:
     }
     
     void shuffleStock(){
-        random_shuffle(stock.begin(), stock.end());
+        auto rng = default_random_engine {};
+        shuffle(stock.begin(), stock.end(), rng);
     }
     
     Hand* generateHand(){

@@ -38,21 +38,19 @@ public:
         
         printRoundState();
         
+        //if(turn) getUserMove();
+        //else getComputerMove();
+        
+        getUserMove();
+        
+        printRoundState();
+        
         //game ending conditions
         /*
         while(!stock->isEmpty()){
             
         }
          */
-    }
-    
-    void printRoundState(){
-        layout->displayLayout();
-        stock->displayStock();
-        cout<<"Human Hand: "<<endl;
-        human->displayHand();
-        cout<<"Computer Hand: "<<endl;
-        computer->displayHand();
     }
     
     
@@ -62,6 +60,7 @@ private:
     Computer* computer;
     Layout* layout;
     bool turn;  //true is user, false is computer
+    bool passed; 
     
     void determineFirstPlayer(){
         Tile engine = layout->getEngine();
@@ -84,7 +83,7 @@ private:
         int humanIndex = human->hasTile(engine);
         if(humanIndex>=0){
             cout<<((Human*)human)->getName()<<" has the engine! "<<endl;
-            human->play(humanIndex, ENGINE, layout);
+            human->play(humanIndex, ENGINE, layout, false);
             turn = false; //human will place and computers turn
             return true;
         }
@@ -99,6 +98,81 @@ private:
             else return false;
 
         }
+    }
+    
+    
+    
+    void printRoundState(){
+        layout->displayLayout();
+        stock->displayStock();
+        cout<<"Computer Hand: "<<endl;
+        computer->displayHand();
+    }
+    
+    void getUserMove(){
+        cout<<endl;
+        
+        cout<<"Human Hand: "<<endl;
+        human->displayHand();
+        
+        cout<<endl;
+        int choice = -1;
+        do{
+            cout<<"Please make a move using of the following options: "<<endl;
+            cout<<"1. Make a move"<<endl;
+            cout<<"2. Pass"<<endl;
+            cin>>choice;
+        }while(choice != 1 && choice != 2);
+        
+        if(choice == 1){
+            Move move = INVALID;
+            
+            do{
+                cout<<endl;
+                cout<<"Please enter the index of the tile you want to play. (1-8):: ";
+                int index;
+                cin>>index;
+                
+                Side s;
+                do{
+                    cout<<"Please enter which side you want to play (L for left and R for right) :: ";
+                    char side;
+                    cin>>side;
+                    if((side == 'l') || (side == 'L')){
+                      s = LEFT;
+                        break;
+                    }
+                    else if ((side == 'R') || (side == 'r')){
+                        s = RIGHT;
+                        break;
+                    }
+                }while(true);
+                    
+                Tile tile = human->getTilefromHand(index);
+                cout<<"You chose to play "<<tile.first<<" - "<<tile.second<<" !"<<" Are you sure? (Y for yes / any key for No) :: ";
+                char sure;
+                cin>>sure;
+                if(sure == 'y' || sure == 'Y' ) move = human->play(index, s, layout, passed);
+                if(move == INVALID) cout<< "Invalid move played! Try Again!"<<endl;
+            }while(move != VALID);
+            
+        }
+        else{
+            passed = true;
+        }
+        
+        turn = !turn;
+    }
+    
+    void getComputerMove(){
+        
+        Move move = computer->play(layout, passed);
+        if(move == PASS) passed = true;
+        else if(move == VALID) cout<<"Computer played "<<computer->getPlayedMove()<<endl;;
+        
+        
+        turn = !turn;
+        
     }
 };
 

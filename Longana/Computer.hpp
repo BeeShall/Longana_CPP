@@ -15,19 +15,26 @@
 class Computer : public Player{
 public:
     Computer(){
+        playedMove = "";
         
     }
     
-    bool play(const Layout* layout){
-        return true;
+    Move play(const Layout* layout, bool passed){
+        
+        //print computer played what on which side
+        return VALID;
     }
     
     void playTile(int tileIndex){
         hand->playTile(tileIndex);
     }
     
-private:
+    string getPlayedMove(){
+        return playedMove;
+    }
     
+private:
+    string playedMove;
     
 };
 

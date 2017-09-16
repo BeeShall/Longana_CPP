@@ -24,20 +24,28 @@ public:
     
     inline string getName() {return name;}
     
-    bool play(int tileIndex, Side side, Layout* layout){
+    Move play(int tileIndex, Side side, Layout* layout, bool passed){
+        
+    
         
         //if human is trying to set the engine
         if(side == ENGINE){
             hand->playTile(tileIndex);
-            return true;
+            return VALID ;
         }
+        
         Tile playedTile = getTilefromHand(tileIndex);
+        
+        
+        //checking if the side is valid
+        if((!isTileDouble(playedTile) && !passed) && side == RIGHT) return INVALID; //if tile is a single and was not passed, then right is invalid;
+        
         //checking if the tile placed by human is a valid one
         if(layout->placeTile(playedTile, side)){
             hand->playTile(tileIndex);
-            return true;
+            return VALID;
         }
-        return false;
+        return INVALID;
     }
     
     Tile getHint(Layout* layout){
