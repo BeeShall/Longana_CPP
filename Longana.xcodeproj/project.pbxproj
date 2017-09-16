@@ -16,7 +16,6 @@
 		72DDF4C11F68CA9D00B90A5C /* Computer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4BF1F68CA9D00B90A5C /* Computer.cpp */; };
 		72DDF4C41F68CAD900B90A5C /* Hand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4C21F68CAD900B90A5C /* Hand.cpp */; };
 		72DDF4C71F68CB0700B90A5C /* Stock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4C51F68CB0700B90A5C /* Stock.cpp */; };
-		72DDF4CB1F68DA7500B90A5C /* LayoutView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4C91F68DA7500B90A5C /* LayoutView.cpp */; };
 		72DDF4CE1F6AE29700B90A5C /* Layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72DDF4CC1F6AE29700B90A5C /* Layout.cpp */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +51,6 @@
 		72DDF4C51F68CB0700B90A5C /* Stock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stock.cpp; sourceTree = "<group>"; };
 		72DDF4C61F68CB0700B90A5C /* Stock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stock.hpp; sourceTree = "<group>"; };
 		72DDF4C81F68CDCC00B90A5C /* GlobalImports.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalImports.h; sourceTree = "<group>"; };
-		72DDF4C91F68DA7500B90A5C /* LayoutView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LayoutView.cpp; sourceTree = "<group>"; };
-		72DDF4CA1F68DA7500B90A5C /* LayoutView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LayoutView.hpp; sourceTree = "<group>"; };
 		72DDF4CC1F6AE29700B90A5C /* Layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Layout.cpp; sourceTree = "<group>"; };
 		72DDF4CD1F6AE29700B90A5C /* Layout.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Layout.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,8 +103,6 @@
 				72DDF4C51F68CB0700B90A5C /* Stock.cpp */,
 				72DDF4C61F68CB0700B90A5C /* Stock.hpp */,
 				72DDF4C81F68CDCC00B90A5C /* GlobalImports.h */,
-				72DDF4C91F68DA7500B90A5C /* LayoutView.cpp */,
-				72DDF4CA1F68DA7500B90A5C /* LayoutView.hpp */,
 				72DDF4CC1F6AE29700B90A5C /* Layout.cpp */,
 				72DDF4CD1F6AE29700B90A5C /* Layout.hpp */,
 			);
@@ -180,7 +175,6 @@
 				72DDF4B51F68C94A00B90A5C /* Tournament.cpp in Sources */,
 				72DDF4BB1F68CA0900B90A5C /* Player.cpp in Sources */,
 				72DDF4BE1F68CA3400B90A5C /* Human.cpp in Sources */,
-				72DDF4CB1F68DA7500B90A5C /* LayoutView.cpp in Sources */,
 				72DDF4C71F68CB0700B90A5C /* Stock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +304,7 @@
 				72DDF4AE1F66EFCE00B90A5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

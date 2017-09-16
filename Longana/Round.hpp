@@ -49,11 +49,11 @@ public:
         printRoundState();
         
         //game ending conditions
-        while(!hasGameEnded()){
+        /*while(!hasGameEnded()){
             if(turn) getUserMove();
             else getComputerMove();
-            cout<<endl;
-        }
+            printRoundState();
+        }*/
         cout<<endl;
         cout<<"The round has ended!"<<endl;
         return getRoundScore();
@@ -138,10 +138,12 @@ private:
     
     
     void printRoundState(){
+        cout<<endl;
+        cout<<"----------------------------------"<<endl;
         layout->displayLayout();
         stock->displayStock();
-        cout<<"Computer Hand: "<<endl;
-        computer->displayHand();
+        cout<<"----------------------------------"<<endl;
+        cout<<endl;
     }
     
     void getUserMove(){
@@ -167,15 +169,18 @@ private:
                     choice = -1;
                     cout<<endl;
                 }
-                else if(choice == 2 && hasAlreadyDrawn){
-                    cout<<"You already drew on tile! You can only pass now!"<<endl;
-                    choice = -1;
-                    cout<<endl;
-                }
-                else{
-                    human->addNewTile(stock->getTileOnTop());
-                    hasAlreadyDrawn = true;
-                    cout<<"Human drew a tile from the stock!"<<endl;
+                else if(choice == 2){
+                    if(hasAlreadyDrawn){
+                        cout<<"You already drew on tile! You can only pass now!"<<endl;
+                        choice = -1;
+                        cout<<endl;
+                    }
+                    else{
+                        human->addNewTile(stock->getTileOnTop());
+                        hasAlreadyDrawn = true;
+                        cout<<human->getName()<<" drew a tile from the stock!"<<endl;
+                        cout<<endl;
+                    }
                 }
             }
         }while(choice != 1 && choice != 3);
@@ -217,11 +222,16 @@ private:
         else{
             passed= true;
             passCount++;
+            cout<<human->getName()<<" has passed! Its computer's trun! "<<endl;
         }
         turn = !turn;
     }
     
     void getComputerMove(){
+        
+        cout<<endl;
+        cout<<"Computer Hand: "<<endl;
+        computer->displayHand();
         
         Move move = computer->play(layout, passed);
         if(move == PASS) passed = true;
