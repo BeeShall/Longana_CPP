@@ -51,6 +51,14 @@ public:
         return movesOver;
     }
     
+    bool isHandEmpty(){
+        return hand->isEmpty();
+    }
+    
+    int getSumofAllPips(){
+        return hand->getSumofAllPips();
+    }
+    
     
     
     virtual Move play() { return VALID; };

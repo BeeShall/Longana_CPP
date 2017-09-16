@@ -26,9 +26,12 @@ public:
         this->human = (Human*)human;
         this->computer = (Computer*)computer;
         layout = new Layout(Tile(enginePip,enginePip));
+        passCount=0;
+        turn = false;
+        passed = false;
     }
     
-    void start(){
+    int play(){
         stock->shuffleStock();
         human->setNewHand(stock->generateHand());
         computer->setNewHand(stock->generateHand());
@@ -46,11 +49,38 @@ public:
         printRoundState();
         
         //game ending conditions
-        /*
-        while(!stock->isEmpty()){
+        while(!hasGameEnded()){
+            if(turn) getUserMove();
+            else getComputerMove();
+            cout<<endl;
+        }
+        cout<<endl;
+        cout<<"The round has ended!"<<endl;
+        return getRoundScore();
+    }
+    
+    int getRoundScore(){
+        int humanTotal = human->getSumofAllPips();
+        int computerTotal = computer->getSumofAllPips();
+        string winner ="Computer";
+        int score = 0;
+        if(human->isHandEmpty()){
+            winner = human->getName();
+            score = computerTotal;
+        }
+        else if(computer->isHandEmpty()){
+            score = humanTotal;
+        }
+        else if(humanTotal < computerTotal){
+            winner = human->getName();
+            score = computerTotal;
+        }
+        else{
+            score = humanTotal;
             
         }
-         */
+        cout<<winner<< " won this round with a score of "<<score<<endl;
+        return score;
     }
     
     
@@ -60,7 +90,8 @@ private:
     Computer* computer;
     Layout* layout;
     bool turn;  //true is user, false is computer
-    bool passed; 
+    bool passed;
+    int passCount;
     
     void determineFirstPlayer(){
         Tile engine = layout->getEngine();
@@ -73,8 +104,6 @@ private:
             newTile = stock->getTileOnTop();
             computer->addNewTile(newTile);
             cout<<"Computer drew "<<newTile.first<< " - "<<newTile.second<<endl;
-            
-            
         }
         layout->setEngine();
     }
@@ -100,6 +129,12 @@ private:
         }
     }
     
+    bool hasGameEnded(){
+        if(human->isHandEmpty() || computer->isHandEmpty()) return true;
+        if(stock->isEmpty() && passCount >2) return true;
+        return false;
+    }
+    
     
     
     void printRoundState(){
@@ -117,12 +152,33 @@ private:
         
         cout<<endl;
         int choice = -1;
+        bool hasAlreadyDrawn = false;
         do{
             cout<<"Please make a move using of the following options: "<<endl;
             cout<<"1. Make a move"<<endl;
-            cout<<"2. Pass"<<endl;
+            cout<<"2. Draw from stock"<<endl;
+            cout<<"3. Pass"<<endl;
             cin>>choice;
-        }while(choice != 1 && choice != 2);
+            
+            //chceking if its a valid option for 2 and 3
+            if(choice == 2 || choice == 3){
+                if(human->hasMoreMoves()) {
+                    cout<<"You already have a valid move you can make! Please try again!"<<endl;
+                    choice = -1;
+                    cout<<endl;
+                }
+                else if(choice == 2 && hasAlreadyDrawn){
+                    cout<<"You already drew on tile! You can only pass now!"<<endl;
+                    choice = -1;
+                    cout<<endl;
+                }
+                else{
+                    human->addNewTile(stock->getTileOnTop());
+                    hasAlreadyDrawn = true;
+                    cout<<"Human drew a tile from the stock!"<<endl;
+                }
+            }
+        }while(choice != 1 && choice != 3);
         
         if(choice == 1){
             Move move = INVALID;
@@ -155,12 +211,13 @@ private:
                 if(sure == 'y' || sure == 'Y' ) move = human->play(index, s, layout, passed);
                 if(move == INVALID) cout<< "Invalid move played! Try Again!"<<endl;
             }while(move != VALID);
+            passCount = 0;
             
         }
         else{
-            passed = true;
+            passed= true;
+            passCount++;
         }
-        
         turn = !turn;
     }
     

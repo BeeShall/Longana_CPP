@@ -48,6 +48,17 @@ public:
         tiles.erase(tiles.begin()+index);
     }
     
+    bool isEmpty(){
+        return tiles.size() == 0;
+    }
+    
+    int getSumofAllPips(){
+        int sum = 0;
+        for(int i=0; i<tiles.size(); i++){
+            sum += (tiles[i].first+tiles[i].second);
+        }
+        return sum;
+    }
 private:
     vector<Tile> tiles;
 };

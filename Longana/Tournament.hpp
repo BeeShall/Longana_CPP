@@ -30,7 +30,8 @@ public:
         //while(human->getScore() < tournametScore && computer->getScore() < tournametScore){
         int enginePip = 6 - engineIndex%6;
             Round r(human, computer, enginePip);
-            r.start();
+            int roundScore = r.play();
+        tournametScore += roundScore;
         //}
         
         if(human->getScore()>= tournametScore) {
