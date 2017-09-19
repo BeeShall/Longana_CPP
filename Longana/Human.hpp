@@ -20,6 +20,8 @@ public:
     
     Human(string name){
         this->name = name;
+        this->side = LEFT;
+        this->otherSide = RIGHT;
     }
     
     inline string getName() {return name;}

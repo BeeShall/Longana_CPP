@@ -26,7 +26,12 @@ public:
         engineSet=true;
     }
     
-    //need to implement validation of tiles better
+    bool isSideEmpty(Side side){
+        if(side == LEFT) return left.size() == 0;
+        else if(side == RIGHT) return right.size() == 0;
+        else return true;
+    }
+    
     bool placeTile(Tile tile, Side side){
         if(engineSet){
             if(validateMove(tile, side)){
@@ -50,6 +55,17 @@ public:
         }
         else{
             cout<<"The engine hasn't been set yet!"<<endl;
+            return false;
+        }
+    }
+    
+    bool canTileBePlaced(Tile tile, Side side){
+        if(engineSet){
+            if(side == LEFT) return checkifTileCanBePlaced(tile, left);
+            else if(side == RIGHT) return checkifTileCanBePlaced(tile, right);
+            else return false;
+        }
+        else{
             return false;
         }
     }
@@ -98,35 +114,33 @@ private:
     bool engineSet;
     
     //tile sent by reference because might need to switch the first and second based on spot
+    
     bool validateMove(Tile &tile, Side side){
         if(isTileDouble(tile)) return true;
         if(side== LEFT){
-            Tile temp;
-            if(left.size()==0) temp = engine;
-            else temp = left.back();
-            if(temp.first == tile.first){
-                swap(tile.first,tile.second);
-                return true;
-            }
-            else if(temp.first == tile.second) return true;
-            else return false;
+            return checkifTileCanBePlaced(tile, left);
         }
         else if(side == RIGHT) {
-            Tile temp;
-            if(right.size()==0) temp = engine;
-            else temp = right.back();
-            if(temp.second == tile.second){
-                swap(tile.first,tile.second);
-                return true;
-            }
-            else if(temp.second == tile.first) return true;
-            else return false;
+            return checkifTileCanBePlaced(tile, right);
         }
         else{
             return false;
         }
         
     }
+    
+    bool checkifTileCanBePlaced(Tile &tile, vector<Tile> &tiles){
+        Tile temp;
+        if(tiles.size()==0) temp = engine;
+        else temp = tiles.back();
+        if(temp.second == tile.second){
+            swap(tile.first,tile.second);
+            return true;
+        }
+        else if(temp.second == tile.first) return true;
+        else return false;
+    }
+    
     
     
 };

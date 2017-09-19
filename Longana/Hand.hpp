@@ -23,6 +23,12 @@ public:
     
     inline void addTile(Tile tile) { tiles.push_back(tile); }
     
+    inline int getNumberOfTileInHand() { return tiles.size();}
+    
+    Tile getTile(int index){
+        return tiles[index];
+    }
+    
     void displayHand(){
         if(tiles.empty()){
             return;
@@ -33,16 +39,14 @@ public:
         cout<<endl;
     }
     
-    Tile getTile(int index){
-       return tiles[index];
-    }
-    
+  
     int hasTile(Tile tile){
         for(int i=0; i<tiles.size(); i++){
             if(tiles[i]== tile) return i;
         }
         return -1;
     }
+    
     
     void playTile(int index){
         tiles.erase(tiles.begin()+index);
@@ -58,6 +62,13 @@ public:
             sum += (tiles[i].first+tiles[i].second);
         }
         return sum;
+    }
+    
+    bool hasDoubles(){
+        for(int i =0; i<tiles.size(); i++){
+            if(isTileDouble(tiles[i])) return true;
+        }
+        return false;
     }
 private:
     vector<Tile> tiles;

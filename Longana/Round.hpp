@@ -164,7 +164,7 @@ private:
             
             //chceking if its a valid option for 2 and 3
             if(choice == 2 || choice == 3){
-                if(human->hasMoreMoves()) {
+                if(human->hasMoreMoves(layout, passed)) {
                     cout<<"You already have a valid move you can make! Please try again!"<<endl;
                     choice = -1;
                     cout<<endl;

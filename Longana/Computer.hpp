@@ -16,6 +16,8 @@ class Computer : public Player{
 public:
     Computer(){
         playedMove = "";
+        this->side = RIGHT;
+        this->otherSide = LEFT;
         
     }
     

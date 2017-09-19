@@ -23,7 +23,6 @@ public:
     void setNewHand(Hand* hand) {
         delete this->hand;
         this->hand = hand;
-        movesOver = false;
     }
     
     void addNewTile(Tile tile){
@@ -47,8 +46,15 @@ public:
         return hand->hasTile(tile);
     }
     
-    bool hasMoreMoves(){
-        return movesOver;
+    bool hasMoreMoves(Layout* layout, bool passed){
+        if(hand->hasDoubles()) return true;
+        for(int i =0 ; i < hand->getNumberOfTileInHand(); i++){
+            if(layout->canTileBePlaced(hand->getTile(i), side)) return true;
+            if(passed){
+                if(layout->canTileBePlaced(hand->getTile(i), otherSide)) return true;
+            }
+        }
+        return false;
     }
     
     bool isHandEmpty(){
@@ -66,7 +72,8 @@ public:
 protected:
     Hand* hand;
     int score;
-    bool movesOver;
+    Side side;
+    Side otherSide;
     
     void addScore(int score){
         this->score += score;
@@ -78,6 +85,9 @@ protected:
         
         return Tile(-1,-1);
     }
+    
+private:
+    
     
     
 };
