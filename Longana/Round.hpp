@@ -182,6 +182,13 @@ private:
                         cout<<endl;
                     }
                 }
+                else{
+                    if(!hasAlreadyDrawn){
+                        cout<<"You cannot pass yet! Please draw a tile from the stock! "<<endl;
+                        choice = -1;
+                        cout<<endl;
+                    }
+                }
             }
         }while(choice != 1 && choice != 3);
         
