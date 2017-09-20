@@ -84,8 +84,8 @@ protected:
     
     //conduct a min max search
     //return the tile that'll lower the sum by most (for now)
-    Move hint(Layout layout, bool passed){
-        vector<Move> moves = getAllPossibleMoves(&layout,  passed);
+    Move hint(Layout* layout, bool passed){
+        vector<Move> moves = getAllPossibleMoves(layout,  passed);
         
         //if there are no moves that the player can make
         if(moves.size() == 0) return {{-1,-1},ANY};
