@@ -13,6 +13,8 @@
 #include "Hand.hpp"
 #include "Layout.hpp"
 
+
+
 class Player{
 public:
     Player(){
@@ -67,7 +69,7 @@ public:
     
     
     
-    virtual Move play() { return VALID; };
+    virtual MoveType play() { return VALID; };
     
 protected:
     Hand* hand;
@@ -79,14 +81,52 @@ protected:
         this->score += score;
     }
     
-    Tile hint(const Layout* layout) const{
+    
+    //conduct a min max search
+    //return the tile that'll lower the sum by most (for now)
+    Move hint(Layout layout, bool passed){
+        vector<Move> moves = getAllPossibleMoves(&layout,  passed);
         
-        // TO:DO AI Logic
+        //if there are no moves that the player can make
+        if(moves.size() == 0) return {{-1,-1},ANY};
         
-        return Tile(-1,-1);
+        //sorting such that the ones with higher value come to the front;
+        sort(moves.begin(),moves.end(),[](Move a, Move b){
+            Tile tileA = a.first;
+            Tile tileB = b.first;
+            return (tileA.first+tileA.second) > (tileB.first+tileB.second);
+        });
+        
+        //find the first single tile
+        for(int i =0; i< moves.size(); i++){
+            if(!isTileDouble(moves[i].first)) return moves[i];
+        }
+        
+        //at this point no single tiles available, so return the first double tile
+        return moves[0];
+        
+        
     }
     
 private:
+    
+    vector<Move> getAllPossibleMoves(Layout* layout, bool passed){
+        vector<Move> moves;
+        for(int i =0 ; i < hand->getNumberOfTileInHand(); i++){
+            Tile tile = hand->getTile(i);
+            if(isTileDouble(tile)) moves.push_back({tile,ANY});
+            else{
+                if(layout->canTileBePlaced(tile, side)) moves.push_back({tile,side});
+                else{
+                    if(passed && layout->canTileBePlaced(tile, otherSide)) moves.push_back({tile,otherSide});
+                }
+            }
+            
+        }
+        return moves;
+    }
+    
+    
     
     
     

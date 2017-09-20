@@ -160,6 +160,7 @@ private:
             cout<<"1. Make a move"<<endl;
             cout<<"2. Draw from stock"<<endl;
             cout<<"3. Pass"<<endl;
+            cout<<"4. Hint Please???"<<endl;
             cin>>choice;
             
             //chceking if its a valid option for 2 and 3
@@ -190,10 +191,25 @@ private:
                     }
                 }
             }
+            
+            if(choice == 4){
+                Move hint = human->getHint(layout, passed);
+                cout<<endl;
+                if(hint.first.first == -1){
+                    cout<<"There are no possible moves that you can make."<<endl;
+                    if(hasAlreadyDrawn) cout<<"You can only pass now!"<<endl;
+                    else cout<<"You'll have to draw one from the stock!"<<endl;
+                }
+                else{
+                    cout<<"You can play "<<hint.first.first<< " - "<<hint.first.second <<" on the "<<getSideString(hint.second)<<"!"<<endl;
+                }
+                cout<<endl;
+                choice = -1;
+            };
         }while(choice != 1 && choice != 3);
         
         if(choice == 1){
-            Move move = INVALID;
+            MoveType move = INVALID;
             
             do{
                 cout<<endl;
@@ -240,7 +256,7 @@ private:
         cout<<"Computer Hand: "<<endl;
         computer->displayHand();
         
-        Move move = computer->play(layout, passed);
+        MoveType move = computer->play(layout, passed);
         if(move == PASS) passed = true;
         else if(move == VALID) cout<<"Computer played "<<computer->getPlayedMove()<<endl;;
         

@@ -26,7 +26,7 @@ public:
     
     inline string getName() {return name;}
     
-    Move play(int tileIndex, Side side, Layout* layout, bool passed){
+    MoveType play(int tileIndex, Side side, Layout* layout, bool passed){
         
     
         
@@ -50,8 +50,8 @@ public:
         return INVALID;
     }
     
-    Tile getHint(Layout* layout){
-        return hint(layout);
+    Move getHint(Layout* layout, bool passed){
+        return hint(*layout, passed);
     }
 private:
     string name;

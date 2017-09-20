@@ -21,7 +21,7 @@ public:
         
     }
     
-    Move play(const Layout* layout, bool passed){
+    MoveType play(const Layout* layout, bool passed){
         
         //print computer played what on which side
         return VALID;

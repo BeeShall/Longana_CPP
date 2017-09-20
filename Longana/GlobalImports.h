@@ -12,14 +12,32 @@
 #include <vector>
 #include <utility>
 #include <stdio.h>
+#include <algorithm>
 #include <iostream>
 using namespace std;
 
+enum Side {LEFT, RIGHT, ENGINE, ANY};
+
 typedef pair<int,int> Tile;
+typedef pair<Tile,Side> Move;
 
-enum Side {LEFT, RIGHT, ENGINE};
+inline string getSideString(Side side){
+    switch (side) {
+        case LEFT:
+            return "LEFT";
+            break;
+        case RIGHT:
+            return "RIGHT";
+            break;
+        default:
+            return "ANY";
+            break;
+    }
+}
 
-enum Move {VALID, INVALID, PASS};
+
+
+enum MoveType {VALID, INVALID, PASS};
 
 inline bool isTileDouble(Tile tile){ return tile.first == tile.second; };
 
