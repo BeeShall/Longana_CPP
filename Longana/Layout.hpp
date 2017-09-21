@@ -32,15 +32,15 @@ public:
         else return true;
     }
     
-    bool placeTile(Tile tile, Side side){
+    bool placeTile(Move move){
         if(engineSet){
-            if(validateMove(tile, side)){
-                if(side == LEFT){
-                    left.push_back(tile);
+            if(validateMove(move)){
+                if(move.second == LEFT){
+                    left.push_back(move.first);
                     return true;
                 }
-                else if(side == RIGHT){
-                   right.push_back(tile);
+                else if(move.second == RIGHT){
+                   right.push_back(move.first);
                     return true;
                 }
                 else{
@@ -59,10 +59,10 @@ public:
         }
     }
     
-    bool canTileBePlaced(Tile tile, Side side){
+    bool canTileBePlaced(Move move){
         if(engineSet){
-            if(side == LEFT) return checkifTileCanBePlaced(tile, left);
-            else if(side == RIGHT) return checkifTileCanBePlaced(tile, right);
+            if(move.second == LEFT) return checkifTileCanBePlaced(move);
+            else if(move.second == RIGHT) return checkifTileCanBePlaced(move);
             else return false;
         }
         else{
@@ -115,13 +115,13 @@ private:
     
     //tile sent by reference because might need to switch the first and second based on spot
     
-    bool validateMove(Tile &tile, Side side){
-        if(isTileDouble(tile)) return true;
-        if(side== LEFT){
-            return checkifTileCanBePlaced(tile, left);
+    bool validateMove(Move &move){
+        if(isTileDouble(move.first)) return true;
+        if(move.second== LEFT){
+            return checkifTileCanBePlaced(move);
         }
-        else if(side == RIGHT) {
-            return checkifTileCanBePlaced(tile, right);
+        else if(move.second == RIGHT) {
+            return checkifTileCanBePlaced(move);
         }
         else{
             return false;
@@ -129,16 +129,31 @@ private:
         
     }
     
-    bool checkifTileCanBePlaced(Tile &tile, vector<Tile> &tiles){
-        Tile temp;
-        if(tiles.size()==0) temp = engine;
-        else temp = tiles.back();
-        if(temp.second == tile.second){
-            swap(tile.first,tile.second);
-            return true;
+    bool checkifTileCanBePlaced(Move &move){
+        if(move.second == LEFT){
+            Tile* tile = &move.first;
+            Tile temp;
+            if(left.size()==0) temp = engine;
+            else temp = left.back();
+            if(temp.first == tile->first){
+                swap(tile->first,tile->second);
+                return true;
+            }
+            else if(temp.first == tile->second) return true;
         }
-        else if(temp.second == tile.first) return true;
-        else return false;
+        else{
+            Tile* tile = &move.first;
+            Tile temp;
+            if(right.size()==0) temp = engine;
+            else temp = right.back();
+            if(temp.second == tile->second){
+                swap(tile->first,tile->second);
+                return true;
+            }
+            else if(temp.second == tile->first) return true;
+        }
+        
+        return false;
     }
     
     

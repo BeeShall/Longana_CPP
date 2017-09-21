@@ -49,7 +49,18 @@ public:
     
     
     void playTile(int index){
+        cout<<"Erasing index "<<index<<endl;
         tiles.erase(tiles.begin()+index);
+        cout<<tiles[index].first<<" - "<<tiles[index].second<<endl;
+    }
+    
+    void playTile(Tile tile){
+        for(int i=0; i<tiles.size(); i++){
+            if(tiles[i]==tile){
+                tiles.erase(tiles.begin()+i);
+                return;
+            }
+        }
     }
     
     bool isEmpty(){

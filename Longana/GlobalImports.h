@@ -41,4 +41,6 @@ enum MoveType {VALID, INVALID, PASS};
 
 inline bool isTileDouble(Tile tile){ return tile.first == tile.second; };
 
+inline bool isChoiceYes(char choice){return (choice == 'y' || choice == 'Y');}
+
 #endif /* GlobalImports_h */

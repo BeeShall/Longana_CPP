@@ -13,38 +13,64 @@
 #include "Round.hpp"
 #include "Player.hpp"
 
+#define MAX_PIP 6
+
 class Tournament{
 public:
     Tournament(){
-        tournametScore = 0;
+        tournamentScore = 0;
+        roundCount = 0;
+        engineIndex =0 ;
     }
     
     Tournament(int finalScore, Player* human, Player* computer){
-        this->tournametScore = finalScore;
+        this->tournamentScore = finalScore;
         this->human = human;
         this->computer = computer;
+        tournamentScore =0;
+        roundCount =0;
+        engineIndex = 0;
     }
     
     void start(){
-        int engineIndex = 0;
         //while(human->getScore() < tournametScore && computer->getScore() < tournametScore){
-        int enginePip = 6 - engineIndex%6;
-            Round r(human, computer, enginePip);
-            int roundScore = r.play();
-        tournametScore += roundScore;
+            Round r(human, computer, getEnginePipForRound());
+            r.play();
+            tournamentScore += r.getRoundScore();
+            roundCount++;
         //}
         
-        if(human->getScore()>= tournametScore) {
+        if(human->getScore()>= tournamentScore) {
             //human won
         }
         else{
             //computer won
         }
     }
+    
+    void load(int tournamentScore, int roundCount, vector<string> &roundInfo){
+        this->tournamentScore = tournamentScore;
+        this->roundCount = roundCount;
+        
+        Round r(human,computer, getEnginePipForRound());
+        r.load(roundInfo);
+        this->tournamentScore += r.getRoundScore();
+        roundCount++;
+        start();
+        
+        
+        
+        
+        
+    }
 private:
-    int tournametScore;
+    int tournamentScore;
+    int roundCount;
     Player* human;
     Player* computer;
+    int engineIndex;
+    
+    inline int getEnginePipForRound(){ return MAX_PIP - (roundCount-1)%MAX_PIP;}
     
 };
 

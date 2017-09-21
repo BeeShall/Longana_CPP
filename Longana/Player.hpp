@@ -51,9 +51,9 @@ public:
     bool hasMoreMoves(Layout* layout, bool passed){
         if(hand->hasDoubles()) return true;
         for(int i =0 ; i < hand->getNumberOfTileInHand(); i++){
-            if(layout->canTileBePlaced(hand->getTile(i), side)) return true;
+            if(layout->canTileBePlaced({hand->getTile(i), side})) return true;
             if(passed){
-                if(layout->canTileBePlaced(hand->getTile(i), otherSide)) return true;
+                if(layout->canTileBePlaced({hand->getTile(i), otherSide})) return true;
             }
         }
         return false;
@@ -82,7 +82,7 @@ protected:
     }
     
     
-    //conduct a min max search
+    
     //return the tile that'll lower the sum by most (for now)
     Move hint(Layout* layout, bool passed){
         vector<Move> moves = getAllPossibleMoves(layout,  passed);
@@ -102,7 +102,12 @@ protected:
             if(!isTileDouble(moves[i].first)) return moves[i];
         }
         
-        //at this point no single tiles available, so return the first double tile
+        //at this point no single tiles available
+        //strategy for the double tiles
+        //scan through your hand with every single pip from the double,
+        //if you have a matching pip in your hand for any of the double
+        //return the first matching double
+        
         return moves[0];
         
         
@@ -116,9 +121,9 @@ private:
             Tile tile = hand->getTile(i);
             if(isTileDouble(tile)) moves.push_back({tile,ANY});
             else{
-                if(layout->canTileBePlaced(tile, side)) moves.push_back({tile,side});
+                if(layout->canTileBePlaced({tile, side})) moves.push_back({tile,side});
                 else{
-                    if(passed && layout->canTileBePlaced(tile, otherSide)) moves.push_back({tile,otherSide});
+                    if(passed && layout->canTileBePlaced({tile, otherSide})) moves.push_back({tile,otherSide});
                 }
             }
             

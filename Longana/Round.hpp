@@ -31,7 +31,7 @@ public:
         passed = false;
     }
     
-    int play(){
+    void play(){
         stock->shuffleStock();
         human->setNewHand(stock->generateHand());
         computer->setNewHand(stock->generateHand());
@@ -40,23 +40,19 @@ public:
         determineFirstPlayer();
         
         printRoundState();
-        
-        //if(turn) getUserMove();
-        //else getComputerMove();
-        
-        getUserMove();
-        
-        printRoundState();
-        
+       
         //game ending conditions
-        /*while(!hasGameEnded()){
+        while(!hasGameEnded()){
             if(turn) getUserMove();
             else getComputerMove();
             printRoundState();
-        }*/
+        }
         cout<<endl;
         cout<<"The round has ended!"<<endl;
-        return getRoundScore();
+    }
+    
+    void load(vector<string> roundInfo){
+        
     }
     
     int getRoundScore(){
@@ -233,10 +229,10 @@ private:
                 }while(true);
                     
                 Tile tile = human->getTilefromHand(index);
-                cout<<"You chose to play "<<tile.first<<" - "<<tile.second<<" !"<<" Are you sure? (Y for yes / any key for No) :: ";
+                cout<<"You chose to play "<<tile.first<<" - "<<tile.second<<" on the "<<getSideString(s) <<" !"<<" Are you sure? (Y for yes / any key for No) :: ";
                 char sure;
                 cin>>sure;
-                if(sure == 'y' || sure == 'Y' ) move = human->play(index, s, layout, passed);
+                if(isChoiceYes(sure)) move = human->play(index, s, layout, passed);
                 if(move == INVALID) cout<< "Invalid move played! Try Again!"<<endl;
             }while(move != VALID);
             passCount = 0;
