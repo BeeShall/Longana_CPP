@@ -34,10 +34,11 @@ public:
     
     void start(){
         //while(human->getScore() < tournametScore && computer->getScore() < tournametScore){
+        roundCount++;
+        cout<<"Engine pip"<<getEnginePipForRound()<<endl;
             Round r(human, computer, getEnginePipForRound());
             r.play();
             tournamentScore += r.getRoundScore();
-            roundCount++;
         //}
         
         if(human->getScore()>= tournamentScore) {

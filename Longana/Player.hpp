@@ -108,6 +108,17 @@ protected:
         //if you have a matching pip in your hand for any of the double
         //return the first matching double
         
+        for(int i =0; i<moves.size(); i++){
+            if(hand->hasPip(moves[i].first.first)){
+                moves[i].second = side;
+                return moves[i];
+            }
+            else{
+                moves[i].second = otherSide;
+                return moves[i];
+            }
+        }
+        
         return moves[0];
         
         

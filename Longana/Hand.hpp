@@ -49,9 +49,7 @@ public:
     
     
     void playTile(int index){
-        cout<<"Erasing index "<<index<<endl;
         tiles.erase(tiles.begin()+index);
-        cout<<tiles[index].first<<" - "<<tiles[index].second<<endl;
     }
     
     void playTile(Tile tile){
@@ -78,6 +76,13 @@ public:
     bool hasDoubles(){
         for(int i =0; i<tiles.size(); i++){
             if(isTileDouble(tiles[i])) return true;
+        }
+        return false;
+    }
+    
+    bool hasPip(int pip){
+        for(int i =0; i<tiles.size(); i++ ){
+            if(tiles[i].first == pip || tiles[i].second == pip) return true;
         }
         return false;
     }
