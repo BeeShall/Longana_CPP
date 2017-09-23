@@ -45,8 +45,7 @@ public:
         
     }
     
-    void load(int tournamentScore, int roundCount, vector<string> &roundInfo){
-        this->tournamentScore = tournamentScore;
+    void load(int roundCount, vector<string> &roundInfo){
         this->roundCount = roundCount;
         
         Round r(human,computer, getEnginePipForRound());

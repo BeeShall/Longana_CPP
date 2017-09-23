@@ -12,7 +12,7 @@
 #include "Tournament.hpp"
 #include "Computer.hpp"
 #include "Human.hpp"
-#include <iostream>
+#include "GlobalImports.h"
 #include <fstream>
 
 class Longana{
@@ -41,9 +41,7 @@ public:
             cout<<"Please enter a tournament score: ";
             cin>> score;
             cout<<endl;
-            human = new Human(name);
-            computer = new Computer();
-            tournament = new Tournament(score, human,computer);
+            init(name,score);
             tournament->start();
         }
     }
@@ -80,26 +78,26 @@ private:
         
         getline(game, line);
         cout<<line<<endl;
-        int index = (int)line.find(':');
-        int tournamentScore = stoi(line.substr(index+1, line.length()));
+        int tournamentScore = stoi(removeLabel(line));
         
         getline(game, line);
-        index = (int)line.find(':');
-        int roundNo = stoi(line.substr(index+1, line.length()));
+        int roundNo = stoi(removeLabel(line));
         
         vector<string> roundInfo;
         while(getline(game, line)){
             if(line != ""){
                 roundInfo.push_back(line);
-                cout<<line<<endl;
             }
         }
+        init("human", tournamentScore);
         
-        tournament = new Tournament();
-        tournament->load(tournamentScore,roundNo, roundInfo);
-        
-        
-        
+        tournament->load(roundNo, roundInfo);
+    }
+    
+    void init(string humanName, int score){
+        human = new Human(humanName);
+        computer = new Computer();
+        tournament = new Tournament(score, human, computer);
     }
     
     

@@ -41,4 +41,9 @@ inline bool isTileDouble(Tile tile){ return tile.first == tile.second; };
 
 inline bool isChoiceYes(char choice){return (choice == 'y' || choice == 'Y');}
 
+static string removeLabel(string line){
+    int index = (int)line.find(':');
+    return line.substr(index+1, line.length());
+};
+
 #endif /* GlobalImports_h */

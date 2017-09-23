@@ -31,7 +31,7 @@ public:
         hand->addTile(tile);
     }
     
-    int getScore(){
+    inline int getScore(){
         return score;
     }
     
@@ -59,7 +59,7 @@ public:
         return false;
     }
     
-    bool isHandEmpty(){
+   bool isHandEmpty(){
         return hand->isEmpty();
     }
     
@@ -67,10 +67,11 @@ public:
         return hand->getSumofAllPips();
     }
     
-    void setScore(int score){
+   void setScore(int score){
         this->score += score;
     }
     
+    void setNewScore(int score) { this->score = score;}
     
     
     virtual MoveType play() { return VALID; };
