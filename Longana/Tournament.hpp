@@ -12,6 +12,7 @@
 #include "GlobalImports.h"
 #include "Round.hpp"
 #include "Player.hpp"
+#include <fstream>
 
 #define MAX_PIP 6
 
@@ -38,6 +39,11 @@ public:
         cout<<"Engine pip"<<getEnginePipForRound()<<endl;
             Round r(human, computer, getEnginePipForRound());
             r.play();
+        if(r.isSaveAndQuit()){
+            string roundInfo = r.getSerielizedRoundInfo();
+            saveToFile(roundInfo);
+            return;
+        }
         //}
         
         cout<<"The torunament has ended!"<<endl;
@@ -63,7 +69,7 @@ private:
     
     inline int getEnginePipForRound(){ return MAX_PIP - (roundCount-1)%MAX_PIP;}
     
-    inline void printWinner(string winner){cout<<"Congratulations! "<<winner<<"has won the tournament !"<<endl;}
+    inline void printWinner(string winner){cout<<"Congratulations! "<<winner<<" has won the tournament !"<<endl;}
     
     void findWinner(){
         int humanScore = human->getScore();
@@ -83,16 +89,23 @@ private:
                 printWinner("Computer");
             }
         }
-        
-        if(human->getScore()>= tournamentScore) {
-            printWinner(((Human*)human)->getName());
-            //human won
-        }
-        else{
-            printWinner("Computer");
-            //computer won
-        }
     }
+    
+    void saveToFile(const string &roundInfo){
+        string fileName;
+        cout<<endl;
+        cout<<"Please enter the name of the file you want to save the game to: ";
+        cin>>fileName;
+        ofstream fout;
+        fout.open(fileName);
+        fout<<"Tournament Score: "<<tournamentScore<<endl;
+        fout<<"Round No.: "<<roundCount<<endl;
+        fout<<endl;
+        fout<<roundInfo;
+        
+        fout.close();
+    }
+    
     
 };
 

@@ -46,13 +46,12 @@ public:
         return temp;
     }
     
-    void displayStock(){
-        cout<<"Current Stock: "<<endl;
+    void displayStock(ostream &os){
         if(stock.empty()) return;
         for(int i=0; i<stock.size(); i++){
-            cout<<stock[i].first<<" - "<< stock[i].second << "   ";
+            os<<stock[i].first<<" - "<< stock[i].second << "   ";
         }
-        cout<<endl;
+        os<<endl;
     }
     
     bool isEmpty(){

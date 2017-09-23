@@ -48,8 +48,8 @@ public:
         return this->hand->getTile(index-1);
     }
     
-    void displayHand(){
-        hand->displayHand();
+    void displayHand(ostream& os){
+        hand->displayHand(os);
     }
     
     int hasTile(Tile tile){

@@ -89,6 +89,8 @@ private:
                 roundInfo.push_back(line);
             }
         }
+        
+        game.close();
         init(playerName , tournamentScore);
         
         tournament->load(roundNo, roundInfo);

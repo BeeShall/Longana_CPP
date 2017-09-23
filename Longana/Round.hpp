@@ -30,8 +30,12 @@ public:
         passCount=0;
         turn = false;
         passed = false;
+        saveAndQuit = false;
     }
     
+    bool isSaveAndQuit(){
+        return saveAndQuit;
+    }
    
     
     void play(){
@@ -106,6 +110,42 @@ public:
         cout<<winner<< " won this round with a score of "<<score<<endl;
     }
     
+    string getSerielizedRoundInfo(){
+        ostringstream ss;
+        ss<<"Computer:"<<endl;
+        ss<<"\t Hand: ";
+        computer->displayHand(ss);
+        ss<<"\t Score: "<<computer->getScore()<<endl;
+        ss<<endl;
+        
+        ss<<"Human:"<<endl;
+        ss<<"\t Hand: ";
+        human->displayHand(ss);
+        ss<<"\t Score: "<<human->getScore()<<endl;
+        ss<<endl;
+        
+        ss<<"Layout: "<<endl;
+        layout->displayLayout(ss);
+        ss<<endl;
+        
+        ss<<"Boneyard: "<<endl;
+        stock->displayStock(ss);
+        ss<<endl;
+        
+        ss<<"Previous Player Passed: ";
+        if(passed) ss<<"Yes";
+        else ss<<"No";
+        
+        ss<<endl;
+        ss<<endl;
+        
+        ss<<"Next Player: ";
+        if(turn) ss<<"Human";
+        else ss<<"Computer";
+        
+        return ss.str();
+    }
+    
     
 private:
     Stock* stock;
@@ -115,6 +155,7 @@ private:
     bool turn;  //true is user, false is computer
     bool passed;
     int passCount;
+    bool saveAndQuit;
     
     void determineFirstPlayer(){
         Tile engine = layout->getEngine();
@@ -163,8 +204,11 @@ private:
     void printRoundState(){
         cout<<endl;
         cout<<"----------------------------------"<<endl;
-        layout->displayLayout();
-        stock->displayStock();
+        cout<<"Current Layout:"<<endl;
+        layout->displayLayout(cout);
+        
+        cout<<"Current Stock:"<<endl;
+        stock->displayStock(cout);
         cout<<"----------------------------------"<<endl;
         cout<<endl;
     }
@@ -173,7 +217,7 @@ private:
         cout<<endl;
         
         cout<<"Human Hand: "<<endl;
-        human->displayHand();
+        human->displayHand(cout);
         
         cout<<endl;
         int choice = -1;
@@ -184,7 +228,22 @@ private:
             cout<<"2. Draw from stock"<<endl;
             cout<<"3. Pass"<<endl;
             cout<<"4. Hint Please???"<<endl;
+            cout<<"5. Save and quit"<<endl;
             cin>>choice;
+            
+            if(choice == 5){
+                cout<<"Are you sure you want to save and quit? (Y/N): ";
+                char c;
+                cin>>c;
+                if(isChoiceYes(c)){
+                    saveAndQuit = true;
+                    return;
+                }
+                else{
+                    choice = -1;
+                    continue;
+                }
+            }
             
             //chceking if its a valid option for 2 and 3
             if(choice == 2 || choice == 3){
@@ -277,7 +336,7 @@ private:
         
         cout<<endl;
         cout<<"Computer Hand: "<<endl;
-        computer->displayHand();
+        computer->displayHand(cout);
         
         MoveType move = computer->play(layout, passed);
         if(move == PASS) passed = true;
@@ -295,6 +354,7 @@ private:
         while(!hasGameEnded()){
             if(turn) getUserMove();
             else getComputerMove();
+            if(saveAndQuit) return;
             printRoundState();
         }
         cout<<endl;

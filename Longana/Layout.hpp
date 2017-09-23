@@ -87,27 +87,26 @@ public:
     }
     
     
-    void displayLayout(){
-        cout<<"Current Layout: "<<endl;
+    void displayLayout(ostream& os){
         if(engineSet){
             //left side
-            cout<<"L ";
+            os<<"L ";
             for(int i = left.size()-1; i>=0; i--){
                 cout<<left[i].first<<" - "<< left[i].second << "   ";
             }
             
             //engine
-            cout<<engine.first<<" - "<< engine.second << "   ";
+            os<<engine.first<<" - "<< engine.second << "   ";
             
             //right side
             for(int i =0; i<right.size(); i++){
-                cout<<right[i].first<<" - "<< right[i].second << "   ";
+                os<<right[i].first<<" - "<< right[i].second << " ";
             }
             
             
-            cout<<"R";
+            os<<"R";
             
-            cout<<endl;
+            os<<endl;
             
             
         }

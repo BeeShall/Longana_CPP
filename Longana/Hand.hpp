@@ -29,14 +29,14 @@ public:
         return tiles[index];
     }
     
-    void displayHand(){
+    void displayHand(ostream& os){
         if(tiles.empty()){
             return;
         }
         for(int i=0; i<tiles.size(); i++){
-            cout<<tiles[i].first<<" - "<< tiles[i].second << "   ";
+            os<<tiles[i].first<<" - "<< tiles[i].second << "   ";
         }
-        cout<<endl;
+        os<<endl;
     }
     
   
