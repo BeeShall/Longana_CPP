@@ -35,8 +35,6 @@ inline string getSideString(Side side){
     }
 }
 
-
-
 enum MoveType {VALID, INVALID, PASS};
 
 inline bool isTileDouble(Tile tile){ return tile.first == tile.second; };

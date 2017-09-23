@@ -55,7 +55,7 @@ public:
         
     }
     
-    int getRoundScore(){
+    void getRoundScore(){
         int humanTotal = human->getSumofAllPips();
         int computerTotal = computer->getSumofAllPips();
         string winner ="Computer";
@@ -63,20 +63,24 @@ public:
         if(human->isHandEmpty()){
             winner = human->getName();
             score = computerTotal;
+            human->setScore(score);
         }
         else if(computer->isHandEmpty()){
             score = humanTotal;
+            computer->setScore(score);
         }
         else if(humanTotal < computerTotal){
             winner = human->getName();
             score = computerTotal;
+            human->setScore(score);
+        }
+        else if (humanTotal > computerTotal){
+            score = humanTotal;
         }
         else{
-            score = humanTotal;
-            
+            cout<<"The round ended with a draw!"<<endl;
         }
         cout<<winner<< " won this round with a score of "<<score<<endl;
-        return score;
     }
     
     

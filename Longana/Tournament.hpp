@@ -38,15 +38,11 @@ public:
         cout<<"Engine pip"<<getEnginePipForRound()<<endl;
             Round r(human, computer, getEnginePipForRound());
             r.play();
-            tournamentScore += r.getRoundScore();
         //}
         
-        if(human->getScore()>= tournamentScore) {
-            //human won
-        }
-        else{
-            //computer won
-        }
+        cout<<"The torunament has ended!"<<endl;
+        findWinner();
+        
     }
     
     void load(int tournamentScore, int roundCount, vector<string> &roundInfo){
@@ -55,13 +51,8 @@ public:
         
         Round r(human,computer, getEnginePipForRound());
         r.load(roundInfo);
-        this->tournamentScore += r.getRoundScore();
         roundCount++;
         start();
-        
-        
-        
-        
         
     }
 private:
@@ -72,6 +63,37 @@ private:
     int engineIndex;
     
     inline int getEnginePipForRound(){ return MAX_PIP - (roundCount-1)%MAX_PIP;}
+    
+    inline void printWinner(string winner){cout<<"Congratulations! "<<winner<<"has won the tournament !"<<endl;}
+    
+    void findWinner(){
+        int humanScore = human->getScore();
+        int computerScore = computer->getScore();
+        
+        cout<< ((Human*)human)->getName()<<"'s final score: "<<humanScore<<endl;
+        cout<<"Computer's final score: "<<computerScore<<endl;
+        
+        if(humanScore >= tournamentScore && computerScore >= tournamentScore){
+            if (humanScore == computerScore){
+                cout<<"The tournament was a draw"<<endl;
+            }
+            else if(humanScore>computerScore){
+                printWinner(((Human*)human)->getName());
+            }
+            else{
+                printWinner("Computer");
+            }
+        }
+        
+        if(human->getScore()>= tournamentScore) {
+            printWinner(((Human*)human)->getName());
+            //human won
+        }
+        else{
+            printWinner("Computer");
+            //computer won
+        }
+    }
     
 };
 

@@ -67,6 +67,10 @@ public:
         return hand->getSumofAllPips();
     }
     
+    void setScore(int score){
+        this->score += score;
+    }
+    
     
     
     virtual MoveType play() { return VALID; };
