@@ -21,10 +21,18 @@ public:
         score = 0;
         hand = new Hand();
     }
+    ~Player(){
+        delete hand;
+    }
     
     void setNewHand(Hand* hand) {
         delete this->hand;
         this->hand = hand;
+    }
+    
+    void setNewHand(vector<Tile> tiles){
+        delete hand;
+        this->hand = new Hand(tiles);
     }
     
     void addNewTile(Tile tile){

@@ -35,7 +35,7 @@ public:
         cout<<"Would you like to load a game? Press y for yes. ";
         cin>>choice;
         cout<<endl;
-        if(isChoiceYes(choice)) loadNewGame();
+        if(isChoiceYes(choice)) loadNewGame(name);
         else{
             int score;
             cout<<"Please enter a tournament score: ";
@@ -63,7 +63,7 @@ private:
     Player* computer;
     Tournament* tournament;
     
-    void loadNewGame(){
+    void loadNewGame(string playerName){
         string name;
         ifstream game;
         do{
@@ -89,13 +89,13 @@ private:
                 roundInfo.push_back(line);
             }
         }
-        init("human", tournamentScore);
+        init(playerName , tournamentScore);
         
         tournament->load(roundNo, roundInfo);
     }
     
-    void init(string humanName, int score){
-        human = new Human(humanName);
+    void init(string name, int score){
+        human = new Human(name);
         computer = new Computer();
         tournament = new Tournament(score, human, computer);
     }

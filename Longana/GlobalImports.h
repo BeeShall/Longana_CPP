@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <algorithm>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 enum Side {LEFT, RIGHT, ENGINE, ANY};

@@ -25,6 +25,10 @@ public:
         }
     }
     
+    void setStock(vector<Tile> tiles){
+        stock = tiles;
+    }
+    
     void shuffleStock(){
         auto rng = default_random_engine {};
         shuffle(stock.begin(), stock.end(), rng);

@@ -26,6 +26,22 @@ public:
         engineSet=true;
     }
     
+    void setLayout(vector<Tile> tiles){
+        cout<<"Engine: "<<engine.first<< " - "<< engine.second<<endl;
+        left.clear();
+        int index =0;
+        while(tiles[index] != engine){
+            left.push_back(tiles[index++]);
+        }
+        reverse(left.begin(), left.end());
+        index++; //skip the engine
+        setEngine();
+        right.clear();
+        while(index<tiles.size()){
+            right.push_back(tiles[index++]);
+        }
+    }
+    
     bool isSideEmpty(Side side){
         if(side == LEFT) return left.size() == 0;
         else if(side == RIGHT) return right.size() == 0;

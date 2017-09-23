@@ -14,6 +14,7 @@
 #include "Human.hpp"
 #include "Computer.hpp"
 #include "Layout.hpp"
+#include <sstream>
 
 class Round{
 public:
@@ -41,7 +42,6 @@ public:
         
         determineFirstPlayer();
         
-        printRoundState();
         start();
        
        
@@ -50,26 +50,32 @@ public:
     void load(vector<string> roundInfo){
         //computer
         vector<Tile> computerHand = parsePips(removeLabel(roundInfo[1])); //hand
-        cout<<stoi(removeLabel(roundInfo[2]))<<endl;
-        cout<<computer->getScore();
+        computer->setNewHand(computerHand);
         computer->setNewScore(stoi(removeLabel(roundInfo[2]))); //score
-        
+     
         //human
         vector<Tile> humanHand = parsePips(removeLabel(roundInfo[4])); //hand
+        human->setNewHand(humanHand);
         human->setNewScore(stoi(removeLabel(roundInfo[5])));//score
         
-        roundInfo[7]; //layout
+       //layout
         int leftIndex = roundInfo[7].find('L')+2; //omitting the L and space
-        int rightIndex = roundInfo[7].find('R');
-        vector<Tile> layout = parsePips(roundInfo[7].substr(leftIndex,rightIndex-leftIndex));
+        int rightIndex = roundInfo[7].find('R')-1; //omitting the space
+        vector<Tile> layoutTiles = parsePips(roundInfo[7].substr(leftIndex,rightIndex-leftIndex));
+        layout->setLayout(layoutTiles);
         
-        vector<Tile> stock = parsePips(roundInfo[9]); //stock
+        vector<Tile> stockTiles = parsePips(roundInfo[9]); //stock
+        stock->setStock(stockTiles);
         
         if(removeLabel(roundInfo[10]).compare("Yes")) passed= true;
         else passed = false;
         
         if(removeLabel(roundInfo[11]).compare("Human")) turn = true; //turn
         else turn = false;
+        
+        start();
+        
+        
     }
     
     void getRoundScore(){
@@ -283,6 +289,8 @@ private:
     }
     
     void start(){
+        
+        printRoundState();
         //game ending conditions
         while(!hasGameEnded()){
             if(turn) getUserMove();
@@ -295,7 +303,11 @@ private:
     
     vector<Tile> parsePips(string pips){
         vector<Tile> tiles;
-        
+        istringstream iss(pips);
+        string tileStr = "";
+        while(iss>>tileStr){
+            tiles.push_back({atoi(&tileStr[0]), atoi(&tileStr[2])});
+        }
         return tiles;
     }
 };
