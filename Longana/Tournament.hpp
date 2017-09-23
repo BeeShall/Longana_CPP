@@ -36,7 +36,6 @@ public:
     void start(){
         //while(human->getScore() < tournametScore && computer->getScore() < tournametScore){
         roundCount++;
-        cout<<"Engine pip"<<getEnginePipForRound()<<endl;
             Round r(human, computer, getEnginePipForRound());
             r.play();
         if(r.isSaveAndQuit()){
@@ -95,7 +94,8 @@ private:
         string fileName;
         cout<<endl;
         cout<<"Please enter the name of the file you want to save the game to: ";
-        cin>>fileName;
+        cin.ignore();
+        getline(cin, fileName);
         ofstream fout;
         fout.open(fileName);
         fout<<"Tournament Score: "<<tournamentScore<<endl;
