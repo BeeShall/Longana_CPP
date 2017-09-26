@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Longana.xcodeproj">
+      location = "self:/Users/beeshall/Documents/Fall 2018/OPL/Longana/Longana_CPP.xcodeproj">
    </FileRef>
 </Workspace>

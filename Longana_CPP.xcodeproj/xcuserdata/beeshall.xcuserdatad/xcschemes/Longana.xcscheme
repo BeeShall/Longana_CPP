@@ -17,7 +17,7 @@
                BlueprintIdentifier = "72DDF4A41F66EFCE00B90A5C"
                BuildableName = "Longana"
                BlueprintName = "Longana"
-               ReferencedContainer = "container:Longana.xcodeproj">
+               ReferencedContainer = "container:Longana_CPP.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,7 +36,7 @@
             BlueprintIdentifier = "72DDF4A41F66EFCE00B90A5C"
             BuildableName = "Longana"
             BlueprintName = "Longana"
-            ReferencedContainer = "container:Longana.xcodeproj">
+            ReferencedContainer = "container:Longana_CPP.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -60,7 +60,7 @@
             BlueprintIdentifier = "72DDF4A41F66EFCE00B90A5C"
             BuildableName = "Longana"
             BlueprintName = "Longana"
-            ReferencedContainer = "container:Longana.xcodeproj">
+            ReferencedContainer = "container:Longana_CPP.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -79,7 +79,7 @@
             BlueprintIdentifier = "72DDF4A41F66EFCE00B90A5C"
             BuildableName = "Longana"
             BlueprintName = "Longana"
-            ReferencedContainer = "container:Longana.xcodeproj">
+            ReferencedContainer = "container:Longana_CPP.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

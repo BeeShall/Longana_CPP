@@ -69,7 +69,7 @@
 		72DDF49C1F66EFCE00B90A5C = {
 			isa = PBXGroup;
 			children = (
-				72DDF4A71F66EFCE00B90A5C /* Longana */,
+				72DDF4A71F66EFCE00B90A5C /* Longana_CPP */,
 				72DDF4A61F66EFCE00B90A5C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,7 +82,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		72DDF4A71F66EFCE00B90A5C /* Longana */ = {
+		72DDF4A71F66EFCE00B90A5C /* Longana_CPP */ = {
 			isa = PBXGroup;
 			children = (
 				72DDF4A81F66EFCE00B90A5C /* main.cpp */,
@@ -106,7 +106,7 @@
 				72DDF4CC1F6AE29700B90A5C /* Layout.cpp */,
 				72DDF4CD1F6AE29700B90A5C /* Layout.hpp */,
 			);
-			path = Longana;
+			path = Longana_CPP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +144,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 72DDF4A01F66EFCE00B90A5C /* Build configuration list for PBXProject "Longana" */;
+			buildConfigurationList = 72DDF4A01F66EFCE00B90A5C /* Build configuration list for PBXProject "Longana_CPP" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -300,7 +300,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		72DDF4A01F66EFCE00B90A5C /* Build configuration list for PBXProject "Longana" */ = {
+		72DDF4A01F66EFCE00B90A5C /* Build configuration list for PBXProject "Longana_CPP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				72DDF4AA1F66EFCE00B90A5C /* Debug */,
