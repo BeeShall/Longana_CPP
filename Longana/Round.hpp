@@ -63,8 +63,8 @@ public:
         human->setNewScore(stoi(removeLabel(roundInfo[5])));//score
         
        //layout
-        int leftIndex = roundInfo[7].find('L')+2; //omitting the L and space
-        int rightIndex = roundInfo[7].find('R')-1; //omitting the space
+        int leftIndex = (int)roundInfo[7].find('L')+2; //omitting the L and space
+        int rightIndex = (int)roundInfo[7].find('R')-1; //omitting the space
         vector<Tile> layoutTiles = parsePips(roundInfo[7].substr(leftIndex,rightIndex-leftIndex));
         layout->setLayout(layoutTiles);
         

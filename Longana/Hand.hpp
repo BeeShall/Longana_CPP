@@ -23,7 +23,7 @@ public:
     
     inline void addTile(Tile tile) { tiles.push_back(tile); }
     
-    inline int getNumberOfTileInHand() { return tiles.size();}
+    inline int getNumberOfTileInHand() { return (int)tiles.size();}
     
     Tile getTile(int index){
         return tiles[index];
@@ -34,7 +34,7 @@ public:
             return;
         }
         for(int i=0; i<tiles.size(); i++){
-            os<<tiles[i].first<<" - "<< tiles[i].second << "   ";
+            os<<tiles[i].first<<"-"<< tiles[i].second << " ";
         }
         os<<endl;
     }

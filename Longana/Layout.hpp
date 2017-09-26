@@ -11,6 +11,8 @@
 
 #include "GlobalImports.h"
 #import <utility>
+#import <sstream>
+
 class Layout{
 public:
     Layout(Tile tile){
@@ -89,22 +91,42 @@ public:
     
     void displayLayout(ostream& os){
         if(engineSet){
+            stringstream line1;
+            stringstream line2;
+            stringstream line3;
             //left side
-            os<<"L ";
-            for(int i = left.size()-1; i>=0; i--){
-                cout<<left[i].first<<" - "<< left[i].second << "   ";
+            if(&os == &cout){
+                line1<<"  ";
+                line2<<"L ";
+                line3<<"  ";
+                
+            }
+            else os<<"L ";
+            for(int i = (int)left.size()-1; i>=0; i--){
+                if(&os == &cout) writeTileToStream(line1, line2, line3, left[i]);
+                else os<<left[i].first<<"-"<< left[i].second << " ";
             }
             
             //engine
-            os<<engine.first<<" - "<< engine.second << "   ";
+            if(&os == &cout) writeTileToStream(line1, line2, line3, engine);
+            else os<<engine.first<<"-"<< engine.second << " ";
             
             //right side
             for(int i =0; i<right.size(); i++){
-                os<<right[i].first<<" - "<< right[i].second << " ";
+                if(&os == &cout) writeTileToStream(line1, line2, line3, right[i]);
+                else os<<right[i].first<<"-"<< right[i].second << " ";
             }
             
-            
-            os<<"R";
+            if(&os == &cout){
+                line1<<" ";
+                line2<<"R";
+                line3<<" ";
+                
+                os<<line1.str()<<endl;
+                os<<line2.str()<<endl;
+                os<<line3.str()<<endl;
+            }
+            else os<<"R";
             
             os<<endl;
             
@@ -169,6 +191,19 @@ private:
         }
         
         return false;
+    }
+    
+    void writeTileToStream(stringstream &line1, stringstream &line2, stringstream &line3, Tile tile){
+        if(isTileDouble(tile)){
+            line1<<tile.first<<" ";
+            line2<<"| ";
+            line3<<tile.second<<" ";
+        }
+        else{
+            line1<<"    ";
+            line2<<tile.first<<"-"<<tile.second<<" ";
+            line3<<"    ";
+        }
     }
     
     

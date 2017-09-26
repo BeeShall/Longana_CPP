@@ -47,4 +47,6 @@ static string removeLabel(string line){
     return line.substr(index+1, line.length());
 };
 
+inline string getTileString(Tile tile){return to_string(tile.first)+"-"+to_string(tile.second); }
+
 #endif /* GlobalImports_h */

@@ -28,13 +28,12 @@ public:
         this->tournamentScore = finalScore;
         this->human = human;
         this->computer = computer;
-        tournamentScore =0;
         roundCount =0;
         engineIndex = 0;
     }
     
     void start(){
-        //while(human->getScore() < tournametScore && computer->getScore() < tournametScore){
+        while(human->getScore() < tournamentScore && computer->getScore() < tournamentScore){
         roundCount++;
             Round r(human, computer, getEnginePipForRound());
             r.play();
@@ -43,7 +42,7 @@ public:
             saveToFile(roundInfo);
             return;
         }
-        //}
+        }
         
         cout<<"The torunament has ended!"<<endl;
         findWinner();

@@ -49,7 +49,7 @@ public:
     void displayStock(ostream &os){
         if(stock.empty()) return;
         for(int i=0; i<stock.size(); i++){
-            os<<stock[i].first<<" - "<< stock[i].second << "   ";
+            os<<stock[i].first<<"-"<< stock[i].second << " ";
         }
         os<<endl;
     }
