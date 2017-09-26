@@ -15,7 +15,8 @@
 class Human:public Player{
 public:
     Human(){
-        
+        this->side = LEFT;
+        this->otherSide = RIGHT;
     }
     
     Human(string name){

@@ -39,6 +39,10 @@ public:
         hand->addTile(tile);
     }
     
+    inline int getNumberOfTilesInHand(){
+        return hand->getNumberOfTileInHand();
+    }
+    
     inline int getScore(){
         return score;
     }

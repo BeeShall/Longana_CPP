@@ -29,7 +29,6 @@ public:
         cout<<"Hi! Welcome to Longana!"<<endl;
         cout<<"Please enter your name: ";
         string name;
-        cin.ignore();
         getline(cin, name);
         
         char choice;

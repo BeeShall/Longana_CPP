@@ -33,6 +33,7 @@ public:
     }
     
     void start(){
+        srand((unsigned)time(NULL));
         while(human->getScore() < tournamentScore && computer->getScore() < tournamentScore){
         roundCount++;
             Round r(human, computer, getEnginePipForRound());

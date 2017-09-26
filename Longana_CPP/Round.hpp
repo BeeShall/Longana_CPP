@@ -47,6 +47,8 @@ public:
         determineFirstPlayer();
         
         start();
+        
+        getRoundScore();
        
        
     }
@@ -79,12 +81,16 @@ public:
         
         start();
         
+        getRoundScore();
+        
         
     }
     
     void getRoundScore(){
         int humanTotal = human->getSumofAllPips();
         int computerTotal = computer->getSumofAllPips();
+        cout<<"Computer Score: "<<computerTotal<<endl;
+        cout<< human->getName()<<"'s Score: "<<humanTotal<<endl;
         string winner ="Computer";
         int score = 0;
         if(human->isHandEmpty()){
@@ -106,6 +112,7 @@ public:
         }
         else{
             cout<<"The round ended with a draw!"<<endl;
+            return;
         }
         cout<<winner<< " won this round with a score of "<<score<<endl;
     }
@@ -259,10 +266,13 @@ private:
                         cout<<endl;
                     }
                     else{
-                        human->addNewTile(stock->getTileOnTop());
+                        Tile tileDrawn =stock->getTileOnTop();
+                        human->addNewTile(tileDrawn);
                         hasAlreadyDrawn = true;
-                        cout<<human->getName()<<" drew a tile from the stock!"<<endl;
+                        cout<<human->getName()<<" drew "<< tileDrawn.first<<"-"<<tileDrawn.second<<" from the stock!"<<endl;
                         cout<<endl;
+                        cout<<"Human Hand:"<<endl;
+                        human->displayHand(cout);
                     }
                 }
                 else{
@@ -295,9 +305,13 @@ private:
             
             do{
                 cout<<endl;
-                cout<<"Please enter the index of the tile you want to play. (1-8):: ";
-                int index;
-                cin>>index;
+                int noOfTiles = human->getNumberOfTilesInHand();
+                int index = -1;
+                do{
+                    cout<<"Please enter the index of the tile you want to play. (1-"<<noOfTiles<<"):: ";
+                    cin>>index;
+                }while(index < 0 || index>noOfTiles);
+                
                 
                 Side s;
                 do{
@@ -339,7 +353,16 @@ private:
         computer->displayHand(cout);
         
         MoveType move = computer->play(layout, passed);
-        if(move == PASS) passed = true;
+        if(move == INVALID){
+            computer->addNewTile(stock->getTileOnTop());
+            cout<<"Computer drew a tile from the stock"<<endl;
+            move = computer->play(layout, passed);
+        }
+        if(move == INVALID){
+            passed = true;
+            cout<<"Computer passed! Your turn!"<<endl;
+            cout<<endl;
+        }
         else if(move == VALID) cout<<"Computer played "<<computer->getPlayedMove()<<endl;;
         
         
