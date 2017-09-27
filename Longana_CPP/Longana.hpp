@@ -29,7 +29,7 @@ public:
         cout<<"Hi! Welcome to Longana!"<<endl;
         cout<<"Please enter your name: ";
         string name;
-        getline(cin, name);
+        cin>>name;
         
         char choice;
         cout<<"Would you like to load a game? Press y for yes. ";
@@ -68,9 +68,8 @@ private:
         ifstream game;
         do{
             cout<<"Enter the file name of the game you want to load with the extension: ";
-            cin.ignore();
-            getline(cin, name);
-            name = "/Users/beeshall/Documents/Fall 2018/Longana/" + name;
+            cin>>name;
+            name = "/Users/beeshall/Documents/Fall 2018/OPL/Longana_CPP/" + name;
             
             game.open(name);
         } while(!game.is_open());

@@ -35,14 +35,16 @@ public:
     void start(){
         srand((unsigned)time(NULL));
         while(human->getScore() < tournamentScore && computer->getScore() < tournamentScore){
-        roundCount++;
+            roundCount++;
             Round r(human, computer, getEnginePipForRound());
             r.play();
-        if(r.isSaveAndQuit()){
-            string roundInfo = r.getSerielizedRoundInfo();
-            saveToFile(roundInfo);
-            return;
-        }
+            if(r.isSaveAndQuit()){
+                string roundInfo = r.getSerielizedRoundInfo();
+                saveToFile(roundInfo);
+                return;
+            }
+            cout<<"Press any key to continue....";
+            getchar();
         }
         
         cout<<"The torunament has ended!"<<endl;
@@ -97,7 +99,7 @@ private:
         cin.ignore();
         getline(cin, fileName);
         ofstream fout;
-        fout.open(fileName);
+        fout.open("/Users/beeshall/Documents/Fall 2018/OPL/Longana_CPP/"+fileName);
         fout<<"Tournament Score: "<<tournamentScore<<endl;
         fout<<"Round No.: "<<roundCount<<endl;
         fout<<endl;

@@ -72,11 +72,12 @@ public:
         
         vector<Tile> stockTiles = parsePips(roundInfo[9]); //stock
         stock->setStock(stockTiles);
+        Y
         
-        if(removeLabel(roundInfo[10]).compare("Yes")) passed= true;
+        if((removeLabel(roundInfo[10])).compare("Yes") == 0) passed= true;
         else passed = false;
         
-        if(removeLabel(roundInfo[11]).compare("Human")) turn = true; //turn
+        if((removeLabel(roundInfo[11])).compare("Human") == 0) turn = true; //turn
         else turn = false;
         
         start();
@@ -89,6 +90,8 @@ public:
     void getRoundScore(){
         int humanTotal = human->getSumofAllPips();
         int computerTotal = computer->getSumofAllPips();
+        cout<<endl;
+        cout<<"----------------------------------"<<endl;
         cout<<"Computer Score: "<<computerTotal<<endl;
         cout<< human->getName()<<"'s Score: "<<humanTotal<<endl;
         string winner ="Computer";
@@ -115,6 +118,8 @@ public:
             return;
         }
         cout<<winner<< " won this round with a score of "<<score<<endl;
+        cout<<"----------------------------------"<<endl;
+        cout<<endl;
     }
     
     string getSerielizedRoundInfo(){
@@ -352,6 +357,8 @@ private:
         cout<<"Computer Hand: "<<endl;
         computer->displayHand(cout);
         
+        cout<<endl;
+        cout<<"----------------------------------"<<endl;
         MoveType move = computer->play(layout, passed);
         if(move == INVALID){
             computer->addNewTile(stock->getTileOnTop());
@@ -363,8 +370,9 @@ private:
             cout<<"Computer passed! Your turn!"<<endl;
             cout<<endl;
         }
-        else if(move == VALID) cout<<"Computer played "<<computer->getPlayedMove()<<endl;;
-        
+        else if(move == VALID) cout<<"Computer played "<<computer->getPlayedMove()<<endl;
+        cout<<"----------------------------------"<<endl;
+        cout<<endl;
         
         turn = !turn;
         
