@@ -30,8 +30,7 @@ void Tournament::start(){
         Round r(human, computer, getEnginePipForRound());
         r.play();
         if(r.isSaveAndQuit()){
-            string roundInfo = r.getSerielizedRoundInfo();
-            saveToFile(roundInfo);
+            saveToFile(r.getSerielizedRoundInfo());
             return;
         }
         cout<<"Press any key to continue....";
@@ -48,8 +47,11 @@ void Tournament::load(int roundCount, vector<string> &roundInfo){
     
     Round r(human,computer, getEnginePipForRound());
     r.load(roundInfo);
-    roundCount++;
-    start();
+    if(!r.isSaveAndQuit()){
+        roundCount++;
+        start();
+    }
+    else saveToFile(r.getSerielizedRoundInfo());
 }
 
 void Tournament::findWinner(){
@@ -75,8 +77,9 @@ void Tournament::findWinner(){
 void Tournament::saveToFile(const string &roundInfo){
     string fileName;
     cout<<endl;
+    cin.ignore();
     cout<<"Please enter the name of the file you want to save the game to: ";
-    cin>>fileName;
+    getline(cin,fileName);
     ofstream fout;
     fout.open("/Users/beeshall/Documents/Fall 2018/OPL/Longana_CPP/"+fileName);
     fout<<"Tournament Score: "<<tournamentScore<<endl;

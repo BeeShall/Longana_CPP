@@ -45,7 +45,8 @@ void Round::play(){
     
     start();
     
-    getRoundScore();
+    
+    if(!saveAndQuit) getRoundScore();
     
     
 }
@@ -78,7 +79,7 @@ void Round::load(vector<string> roundInfo){
     
     start();
     
-    getRoundScore();
+    if(!saveAndQuit) getRoundScore();
     
     
 }

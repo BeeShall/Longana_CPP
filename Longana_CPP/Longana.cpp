@@ -21,7 +21,7 @@ void Longana::start(){
     cout<<"Hi! Welcome to Longana!"<<endl;
     cout<<"Please enter your name: ";
     string name;
-    cin>>name;
+    getline(cin,name);
     
     char choice;
     cout<<"Would you like to load a game? Press y for yes. ";
@@ -59,8 +59,9 @@ void Longana::loadNewGame(string playerName){
     string name;
     ifstream game;
     do{
+        cin.ignore();
         cout<<"Enter the file name of the game you want to load with the extension: ";
-        cin>>name;
+        getline(cin,name);
         name = "/Users/beeshall/Documents/Fall 2018/OPL/Longana_CPP/" + name;
         
         game.open(name);
