@@ -16,49 +16,19 @@
 
 class Stock{
 public:
-    Stock(){
-        //generating the stock
-        for(int i=0; i<=6; i++){
-            for(int j=i; j<=6; j++){
-                stock.push_back({i,j});
-            }
-        }
-    }
+    Stock();
     
-    void setStock(vector<Tile> tiles){
-        stock = tiles;
-    }
+    void setStock(vector<Tile> tiles);
     
-    void shuffleStock(){
-        auto rng = default_random_engine {};
-        shuffle(stock.begin(), stock.end(), rng);
-    }
+    inline bool isEmpty() const { return stock.size()==0; }
     
-    Hand* generateHand(){
-        vector<Tile> tiles(stock.end()-8, stock.end());
-        stock.erase(stock.end()-8, stock.end());
-        return new Hand(tiles);
-    }
+    void shuffleStock();
     
-    Tile getTileOnTop(){
-        Tile temp = stock.back();
-        stock.pop_back();
-        return temp;
-    }
+    Hand* generateHand();
     
-    void displayStock(ostream &os){
-        if(stock.empty()) return;
-        for(int i=(int)stock.size()-1; i>=0; i--){
-            os<<stock[i].first<<"-"<< stock[i].second << " ";
-        }
-        os<<endl;
-    }
+    Tile getTileOnTop();
     
-    bool isEmpty(){
-        return stock.size()==0;
-    }
-    
-    
+    void displayStock(ostream &os);
     
 private:
     vector<Tile> stock;

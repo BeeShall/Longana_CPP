@@ -18,49 +18,14 @@
 
 class Tournament{
 public:
-    Tournament(){
-        tournamentScore = 0;
-        roundCount = 0;
-        engineIndex =0 ;
-    }
+    Tournament();
     
-    Tournament(int finalScore, Player* human, Player* computer){
-        this->tournamentScore = finalScore;
-        this->human = human;
-        this->computer = computer;
-        roundCount =0;
-        engineIndex = 0;
-    }
+    Tournament(int finalScore, Player* human, Player* computer);
     
-    void start(){
-        srand((unsigned)time(NULL));
-        while(human->getScore() < tournamentScore && computer->getScore() < tournamentScore){
-            roundCount++;
-            Round r(human, computer, getEnginePipForRound());
-            r.play();
-            if(r.isSaveAndQuit()){
-                string roundInfo = r.getSerielizedRoundInfo();
-                saveToFile(roundInfo);
-                return;
-            }
-            cout<<"Press any key to continue....";
-            getchar();
-        }
-        
-        cout<<"The torunament has ended!"<<endl;
-        findWinner();
-        
-    }
+    void start();
     
-    void load(int roundCount, vector<string> &roundInfo){
-        this->roundCount = roundCount;
-        
-        Round r(human,computer, getEnginePipForRound());
-        r.load(roundInfo);
-        roundCount++;
-        start();
-        
-    }
+    void load(int roundCount, vector<string> &roundInfo);
+    
 private:
     int tournamentScore;
     int roundCount;
@@ -70,44 +35,11 @@ private:
     
     inline int getEnginePipForRound(){ return MAX_PIP - (roundCount-1)%MAX_PIP;}
     
+    void findWinner();
+    
     inline void printWinner(string winner){cout<<"Congratulations! "<<winner<<" has won the tournament !"<<endl;}
     
-    void findWinner(){
-        int humanScore = human->getScore();
-        int computerScore = computer->getScore();
-        
-        cout<< ((Human*)human)->getName()<<"'s final score: "<<humanScore<<endl;
-        cout<<"Computer's final score: "<<computerScore<<endl;
-        
-        if(humanScore >= tournamentScore && computerScore >= tournamentScore){
-            if (humanScore == computerScore){
-                cout<<"The tournament was a draw"<<endl;
-            }
-            else if(humanScore>computerScore){
-                printWinner(((Human*)human)->getName());
-            }
-            else{
-                printWinner("Computer");
-            }
-        }
-    }
-    
-    void saveToFile(const string &roundInfo){
-        string fileName;
-        cout<<endl;
-        cout<<"Please enter the name of the file you want to save the game to: ";
-        cin.ignore();
-        getline(cin, fileName);
-        ofstream fout;
-        fout.open("/Users/beeshall/Documents/Fall 2018/OPL/Longana_CPP/"+fileName);
-        fout<<"Tournament Score: "<<tournamentScore<<endl;
-        fout<<"Round No.: "<<roundCount<<endl;
-        fout<<endl;
-        fout<<roundInfo;
-        
-        fout.close();
-    }
-    
+    void saveToFile(const string &roundInfo);
     
 };
 

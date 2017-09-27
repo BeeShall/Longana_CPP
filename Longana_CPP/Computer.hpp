@@ -14,32 +14,13 @@
 
 class Computer : public Player{
 public:
-    Computer(){
-        playedMove = "";
-        this->side = RIGHT;
-        this->otherSide = LEFT;
-        
-    }
+    Computer();
     
-    MoveType play(Layout* layout, bool passed){
-        
-        //print computer played what on which side
-        Move hint = this->hint(layout, passed);
-        if(hint.first.first == -1) return INVALID;
-        else{
-            layout->placeTile(hint);
-            hand->playTile(hint.first);
-            playedMove = to_string(hint.first.first) + " - " + to_string(hint.first.second) + " on the " + getSideString(hint.second);
-        }
-        return VALID;
-    }
+    inline string getPlayedMove() const{ return playedMove; }
     
-    void playTile(int tileIndex){
-        hand->playTile(tileIndex);
-    }
-    string getPlayedMove(){
-        return playedMove;
-    }
+    MoveType play(Layout* layout, bool passed);
+    
+    void playTile(int tileIndex);
     
 private:
     string playedMove;

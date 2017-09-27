@@ -13,79 +13,32 @@
 
 class Hand{
 public:
-    Hand(){
-        
-    }
+    Hand();
     
-    Hand(vector<Tile> tiles){
-        this->tiles = tiles;
-    }
+    Hand(vector<Tile> tiles);
     
+    inline int getNumberOfTileInHand() const { return (int)tiles.size();}
+    
+    inline Tile getTile(int index) const { return tiles[index]; }
+   
     inline void addTile(Tile tile) { tiles.push_back(tile); }
-    
-    inline int getNumberOfTileInHand() { return (int)tiles.size();}
-    
-    Tile getTile(int index){
-        return tiles[index];
-    }
-    
-    void displayHand(ostream& os){
-        if(tiles.empty()){
-            return;
-        }
-        for(int i=0; i<tiles.size(); i++){
-            os<<tiles[i].first<<"-"<< tiles[i].second << " ";
-        }
-        os<<endl;
-    }
-    
   
-    int hasTile(Tile tile){
-        for(int i=0; i<tiles.size(); i++){
-            if(tiles[i]== tile) return i;
-        }
-        return -1;
-    }
+    inline bool isEmpty() const { return tiles.size() == 0; }
     
+    int hasTile(Tile tile);
     
-    void playTile(int index){
-        tiles.erase(tiles.begin()+index);
-    }
+    void playTile(int index);
     
-    void playTile(Tile tile){
-        for(int i=0; i<tiles.size(); i++){
-            if(tiles[i]==tile){
-                tiles.erase(tiles.begin()+i);
-                return;
-            }
-        }
-    }
+    void playTile(Tile tile);
     
-    bool isEmpty(){
-        return tiles.size() == 0;
-    }
+    int getSumofAllPips();
     
-    int getSumofAllPips(){
-        int sum = 0;
-        for(int i=0; i<tiles.size(); i++){
-            sum += (tiles[i].first+tiles[i].second);
-        }
-        return sum;
-    }
+    bool hasDoubles();
     
-    bool hasDoubles(){
-        for(int i =0; i<tiles.size(); i++){
-            if(isTileDouble(tiles[i])) return true;
-        }
-        return false;
-    }
+    bool hasPip(int pip);
     
-    bool hasPip(int pip){
-        for(int i =0; i<tiles.size(); i++ ){
-            if(tiles[i].first == pip || tiles[i].second == pip) return true;
-        }
-        return false;
-    }
+    void displayHand(ostream& os);
+    
 private:
     vector<Tile> tiles;
 };
