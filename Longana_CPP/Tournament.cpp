@@ -67,7 +67,7 @@ void Tournament::start(){
         
         //if user wishes to save and quit, serielize
         if(r.isSaveAndQuit()){
-            saveToFile(r.getSerielizedRoundInfo());
+            saveToFile(r.getSerializedRoundInfo());
             return;
         }
         cout<<"Press any key to continue....";
@@ -104,7 +104,7 @@ void Tournament::load(int roundCount, const vector<string> &roundInfo){
         roundCount++;
         start();
     }
-    else saveToFile(r.getSerielizedRoundInfo());
+    else saveToFile(r.getSerializedRoundInfo());
 }
 
 /* *********************************************************************

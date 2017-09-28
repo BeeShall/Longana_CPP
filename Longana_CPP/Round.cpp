@@ -84,42 +84,7 @@ void Round::load(const vector<string> &roundInfo){
     
 }
 
-void Round::getRoundScore(){
-    int humanTotal = human->getSumofAllPips();
-    int computerTotal = computer->getSumofAllPips();
-    cout<<endl;
-    cout<<"----------------------------------"<<endl;
-    cout<<"Computer Score: "<<computerTotal<<endl;
-    cout<< human->getName()<<"'s Score: "<<humanTotal<<endl;
-    string winner ="Computer";
-    int score = 0;
-    if(human->isHandEmpty()){
-        winner = human->getName();
-        score = computerTotal;
-        human->setScore(score);
-    }
-    else if(computer->isHandEmpty()){
-        score = humanTotal;
-        computer->setScore(score);
-    }
-    else if(humanTotal < computerTotal){
-        winner = human->getName();
-        score = computerTotal;
-        human->setScore(score);
-    }
-    else if (humanTotal > computerTotal){
-        score = humanTotal;
-    }
-    else{
-        cout<<"The round ended with a draw!"<<endl;
-        return;
-    }
-    cout<<winner<< " won this round with a score of "<<score<<endl;
-    cout<<"----------------------------------"<<endl;
-    cout<<endl;
-}
-
-string Round::getSerielizedRoundInfo(){
+string Round::getSerializedRoundInfo(){
     ostringstream ss;
     ss<<"Computer:"<<endl;
     ss<<"\t Hand: ";
@@ -155,6 +120,33 @@ string Round::getSerielizedRoundInfo(){
     return ss.str();
 }
 
+void Round::start(){
+    printRoundState();
+    //game ending conditions
+    while(!hasRoundEnded()){
+        if(turn) getUserMove();
+        else getComputerMove();
+        if(saveAndQuit) return;
+        printRoundState();
+    }
+    cout<<endl;
+    cout<<"The round has ended!"<<endl;
+}
+
+void Round::determineFirstPlayer(){
+    Tile engine = layout->getEngine();
+    while(!checkIfPlayerHasEngine(engine)){
+        cout<<"No one has the engine yet! Both players draw from the top! "<<endl;
+        Tile newTile = stock->getTileOnTop();
+        human->addNewTile(newTile);
+        cout<<human->getName()<<" drew "<<newTile.first<< " - "<<newTile.second<<endl;
+        
+        newTile = stock->getTileOnTop();
+        computer->addNewTile(newTile);
+        cout<<"Computer drew "<<newTile.first<< " - "<<newTile.second<<endl;
+    }
+    layout->setEngine();
+}
 
 bool Round::checkIfPlayerHasEngine(Tile engine){
     int humanIndex = human->hasTile(engine);
@@ -177,34 +169,6 @@ bool Round::checkIfPlayerHasEngine(Tile engine){
     }
 }
 
-void Round::determineFirstPlayer(){
-    Tile engine = layout->getEngine();
-    while(!checkIfPlayerHasEngine(engine)){
-        cout<<"No one has the engine yet! Both players draw from the top! "<<endl;
-        Tile newTile = stock->getTileOnTop();
-        human->addNewTile(newTile);
-        cout<<human->getName()<<" drew "<<newTile.first<< " - "<<newTile.second<<endl;
-        
-        newTile = stock->getTileOnTop();
-        computer->addNewTile(newTile);
-        cout<<"Computer drew "<<newTile.first<< " - "<<newTile.second<<endl;
-    }
-    layout->setEngine();
-}
-
-void Round::start(){
-    printRoundState();
-    //game ending conditions
-    while(!hasGameEnded()){
-        if(turn) getUserMove();
-        else getComputerMove();
-        if(saveAndQuit) return;
-        printRoundState();
-    }
-    cout<<endl;
-    cout<<"The round has ended!"<<endl;
-}
-
 vector<Tile> Round::parsePips(string pips){
     vector<Tile> tiles;
     istringstream iss(pips);
@@ -215,9 +179,9 @@ vector<Tile> Round::parsePips(string pips){
     return tiles;
 }
 
-bool Round::hasGameEnded(){
+bool Round::hasRoundEnded(){
     if(human->isHandEmpty() || computer->isHandEmpty()) return true;
-    if(stock->isEmpty() && passCount >2) return true;
+    if(stock->isEmpty() && passCount >3) return true;
     return false;
 }
 
@@ -355,7 +319,7 @@ void Round::getUserMove(){
     }
     else{
         passed= true;
-        passCount++;
+        if(stock->isEmpty())passCount++;
         cout<<human->getName()<<" has passed! Its computer's trun! "<<endl;
     }
     turn = !turn;
@@ -377,6 +341,7 @@ void Round::getComputerMove(){
     }
     if(move == INVALID){
         passed = true;
+        if(stock->isEmpty())passCount++;
         cout<<"Computer passed! Your turn!"<<endl;
         cout<<endl;
     }
@@ -388,3 +353,37 @@ void Round::getComputerMove(){
     
 }
 
+void Round::getRoundScore(){
+    int humanTotal = human->getSumofAllPips();
+    int computerTotal = computer->getSumofAllPips();
+    cout<<endl;
+    cout<<"----------------------------------"<<endl;
+    cout<<"Computer Score: "<<computerTotal<<endl;
+    cout<< human->getName()<<"'s Score: "<<humanTotal<<endl;
+    string winner ="Computer";
+    int score = 0;
+    if(human->isHandEmpty()){
+        winner = human->getName();
+        score = computerTotal;
+        human->setScore(score);
+    }
+    else if(computer->isHandEmpty()){
+        score = humanTotal;
+        computer->setScore(score);
+    }
+    else if(humanTotal < computerTotal){
+        winner = human->getName();
+        score = computerTotal;
+        human->setScore(score);
+    }
+    else if (humanTotal > computerTotal){
+        score = humanTotal;
+    }
+    else{
+        cout<<"The round ended with a draw!"<<endl;
+        return;
+    }
+    cout<<winner<< " won this round with a score of "<<score<<endl;
+    cout<<"----------------------------------"<<endl;
+    cout<<endl;
+}
