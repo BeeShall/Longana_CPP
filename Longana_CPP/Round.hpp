@@ -176,49 +176,60 @@ private:
     void printRoundState();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
+     Function Name: getUserMove
+     Purpose: gets and makes the UserMove
+     Parameters: None
+     Return Value: None
      Local Variables:
-     temp[], an integer array used to sort the grades
+        choice, character to get user menu choice
+         hasAlreadyDrawn, boolean to record if the user drew a tile from boneyard
+         tileDrawn, Tile to save the drawn tile
+         MoveType, to record of the user's move was valid or invalid
      Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+         1) Ask user for a choice
+         2) If wants to save and quit, set saveAndQuit to true and return
+         3) If wants to draw or tile or pass, validate if the user has a valid move in hand
+         4) If not, validate if the user already drew a tile
+         5) If not and user chose draw a tile, draw a tile drom the stock and show the menu again
+         6) If the user chose make a move, get a move and validate it
+         7) If the user chose pass and pass is allowed, set passed to true
+         8) If the stock is empty, increase the passcount to record round end
+         9) Switch the turn
      Assistance Received: none
      ********************************************************************* */
     void getUserMove();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
+     Function Name: getComputerMove
+     Purpose: To get and make the computer move
+     Parameters: None
+     Return Value: None
      Local Variables:
-     temp[], an integer array used to sort the grades
+         move, MoveType to record whether the computer has a valid move or not
      Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+         1) get the move from computer
+         2) if invalid, draw from stock
+         3) if still invalid, pass
+         4) switch the turn
      Assistance Received: none
      ********************************************************************* */
     void getComputerMove();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
+     Function Name: getRoundScore
+     Purpose: To calculate the round score and the winner
+     Parameters: None
+     Return Value: None
      Local Variables:
-     temp[], an integer array used to sort the grades
+         humanTotal: sum of pips for human
+         computerTotal: sum of pops for computer
+         winner: winner of the round
      Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+         1) Get sum of pips for both the player
+         2) if a player's hand is empty, the player with empty hand is the winner and his score is the sum of pips from other player
+         3) if hand was not empty, then the player with lower sum wins and get score as the sum of pips from other palyer
+         4) if equal, its a draw and return
+         5) else print the winner
      Assistance Received: none
      ********************************************************************* */
     void getRoundScore();

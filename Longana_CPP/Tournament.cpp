@@ -55,7 +55,7 @@ Tournament::Tournament(int finalScore, Player* human, Player* computer){
  ********************************************************************* */
 void Tournament::start(){
     //seeding for random shuffle
-    srand((unsigned)time(NULL));
+    srand(time(0));
     
     //while either player doesn't reach the tournament score
     while(human->getScore() < tournamentScore && computer->getScore() < tournamentScore){
@@ -70,8 +70,9 @@ void Tournament::start(){
             saveToFile(r.getSerializedRoundInfo());
             return;
         }
+        char c;
         cout<<"Press any key to continue....";
-        getchar();
+        cin>>c;
     }
     
     //after reaching the tournament score
