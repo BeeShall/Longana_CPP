@@ -69,13 +69,16 @@ void Longana::loadNewGame(string playerName){
     
     string line;
     
+    //Parsing tournament score
     getline(game, line);
     cout<<line<<endl;
     int tournamentScore = stoi(removeLabel(line));
     
+    //parsing round count
     getline(game, line);
     int roundNo = stoi(removeLabel(line));
     
+    //storing rest of the lines exclusing enpty lines to later parse from the round
     vector<string> roundInfo;
     while(getline(game, line)){
         if(line != ""){
@@ -84,6 +87,8 @@ void Longana::loadNewGame(string playerName){
     }
     
     game.close();
+    
+    //Initialize the tournament with parsed info and load the torunament
     init(playerName , tournamentScore);
     
     tournament->load(roundNo, roundInfo);

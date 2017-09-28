@@ -306,7 +306,9 @@ void Round::getUserMove(){
                 else cout<<"You'll have to draw one from the stock!"<<endl;
             }
             else{
+                cout<<"----------------------------------"<<endl;
                 cout<<"You can play "<<hint.first.first<< " - "<<hint.first.second <<" on the "<<getSideString(hint.second)<<"!"<<endl;
+                cout<<"----------------------------------"<<endl;
             }
             cout<<endl;
             choice = -1;

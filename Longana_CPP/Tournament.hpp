@@ -18,12 +18,68 @@
 
 class Tournament{
 public:
+    /* *********************************************************************
+     Function Name: compute
+     Purpose: To calculate the average grade in a class
+     Parameters:
+     grades[], an array passed by value. It holds individual grades
+     size, an integer. It refers to the number of students in the class
+     Return Value: The average grade in the class, a real value
+     Local Variables:
+     temp[], an integer array used to sort the grades
+     Algorithm:
+     1) Add all the grades
+     2) Divide the sum by the number of students in class to calculate the average
+     Assistance Received: none
+     ********************************************************************* */
     Tournament();
     
+    /* *********************************************************************
+     Function Name: compute
+     Purpose: To calculate the average grade in a class
+     Parameters:
+     grades[], an array passed by value. It holds individual grades
+     size, an integer. It refers to the number of students in the class
+     Return Value: The average grade in the class, a real value
+     Local Variables:
+     temp[], an integer array used to sort the grades
+     Algorithm:
+     1) Add all the grades
+     2) Divide the sum by the number of students in class to calculate the average
+     Assistance Received: none
+     ********************************************************************* */
     Tournament(int finalScore, Player* human, Player* computer);
     
+    /* *********************************************************************
+     Function Name: compute
+     Purpose: To calculate the average grade in a class
+     Parameters:
+     grades[], an array passed by value. It holds individual grades
+     size, an integer. It refers to the number of students in the class
+     Return Value: The average grade in the class, a real value
+     Local Variables:
+     temp[], an integer array used to sort the grades
+     Algorithm:
+     1) Add all the grades
+     2) Divide the sum by the number of students in class to calculate the average
+     Assistance Received: none
+     ********************************************************************* */
     void start();
     
+    /* *********************************************************************
+     Function Name: compute
+     Purpose: To calculate the average grade in a class
+     Parameters:
+     grades[], an array passed by value. It holds individual grades
+     size, an integer. It refers to the number of students in the class
+     Return Value: The average grade in the class, a real value
+     Local Variables:
+     temp[], an integer array used to sort the grades
+     Algorithm:
+     1) Add all the grades
+     2) Divide the sum by the number of students in class to calculate the average
+     Assistance Received: none
+     ********************************************************************* */
     void load(int roundCount, vector<string> &roundInfo);
     
 private:
@@ -33,12 +89,68 @@ private:
     Player* computer;
     int engineIndex;
     
+    /* *********************************************************************
+     Function Name: compute
+     Purpose: To calculate the average grade in a class
+     Parameters:
+     grades[], an array passed by value. It holds individual grades
+     size, an integer. It refers to the number of students in the class
+     Return Value: The average grade in the class, a real value
+     Local Variables:
+     temp[], an integer array used to sort the grades
+     Algorithm:
+     1) Add all the grades
+     2) Divide the sum by the number of students in class to calculate the average
+     Assistance Received: none
+     ********************************************************************* */
     inline int getEnginePipForRound(){ return MAX_PIP - (roundCount-1)%MAX_PIP;}
     
+    /* *********************************************************************
+     Function Name: compute
+     Purpose: To calculate the average grade in a class
+     Parameters:
+     grades[], an array passed by value. It holds individual grades
+     size, an integer. It refers to the number of students in the class
+     Return Value: The average grade in the class, a real value
+     Local Variables:
+     temp[], an integer array used to sort the grades
+     Algorithm:
+     1) Add all the grades
+     2) Divide the sum by the number of students in class to calculate the average
+     Assistance Received: none
+     ********************************************************************* */
     void findWinner();
     
+    /* *********************************************************************
+     Function Name: compute
+     Purpose: To calculate the average grade in a class
+     Parameters:
+     grades[], an array passed by value. It holds individual grades
+     size, an integer. It refers to the number of students in the class
+     Return Value: The average grade in the class, a real value
+     Local Variables:
+     temp[], an integer array used to sort the grades
+     Algorithm:
+     1) Add all the grades
+     2) Divide the sum by the number of students in class to calculate the average
+     Assistance Received: none
+     ********************************************************************* */
     inline void printWinner(string winner){cout<<"Congratulations! "<<winner<<" has won the tournament !"<<endl;}
     
+    /* *********************************************************************
+     Function Name: compute
+     Purpose: To calculate the average grade in a class
+     Parameters:
+     grades[], an array passed by value. It holds individual grades
+     size, an integer. It refers to the number of students in the class
+     Return Value: The average grade in the class, a real value
+     Local Variables:
+     temp[], an integer array used to sort the grades
+     Algorithm:
+     1) Add all the grades
+     2) Divide the sum by the number of students in class to calculate the average
+     Assistance Received: none
+     ********************************************************************* */
     void saveToFile(const string &roundInfo);
     
 };
