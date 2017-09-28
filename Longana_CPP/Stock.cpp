@@ -22,7 +22,7 @@ void Stock::setStock(vector<Tile> tiles){
 }
 
 void Stock::shuffleStock(){
-    auto rng = default_random_engine {};
+    auto rng = default_random_engine ((unsigned)time(NULL));
     shuffle(stock.begin(), stock.end(), rng);
 }
 

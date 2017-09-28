@@ -54,9 +54,6 @@ Tournament::Tournament(int finalScore, Player* human, Player* computer){
  Assistance Received: none
  ********************************************************************* */
 void Tournament::start(){
-    //seeding for random shuffle
-    srand(time(0));
-    
     //while either player doesn't reach the tournament score
     while(human->getScore() < tournamentScore && computer->getScore() < tournamentScore){
         roundCount++;
