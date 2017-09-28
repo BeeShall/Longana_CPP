@@ -51,7 +51,7 @@ void Round::play(){
     
 }
 
-void Round::load(vector<string> roundInfo){
+void Round::load(const vector<string> &roundInfo){
     //computer
     vector<Tile> computerHand = parsePips(removeLabel(roundInfo[1])); //hand
     computer->setNewHand(computerHand);

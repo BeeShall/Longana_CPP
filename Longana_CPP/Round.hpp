@@ -112,7 +112,7 @@ public:
      2) Divide the sum by the number of students in class to calculate the average
      Assistance Received: none
      ********************************************************************* */
-    void load(vector<string> roundInfo);
+    void load(const vector<string> &roundInfo);
     
     /* *********************************************************************
      Function Name: compute

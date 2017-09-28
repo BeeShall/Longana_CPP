@@ -21,6 +21,7 @@ public:
      Function Name: Longana
      Purpose: Default constructor for the class
      Parameters: None
+     Return Value: None
      Local Variables: None
      Algorithm: None
      Assistance Received: none
@@ -31,6 +32,7 @@ public:
      Function Name: ~Longana
      Purpose: Destructor for the class
      Parameters: None
+     Return Value: None
      Local Variables: None
      Algorithm: Cleans up both tha player and tournament
      Assistance Received: none
@@ -41,6 +43,7 @@ public:
      Function Name: start
      Purpose: To start the game by loading from file or  start fresh initializing players and tournament
      Parameters: None
+     Return Value: None
      Local Variables: strings and characters used to get user choices
      Algorithm: Ask for user name and asks whether to start a new game or load saved.
      Assistance Received: none
@@ -51,6 +54,7 @@ public:
      Function Name: reset
      Purpose: To free up resources from heap
      Parameters: None
+     Return Value: None
      Local Variables: None
      Algorithm: delete players and tournament
      Assistance Received: none
@@ -61,6 +65,7 @@ public:
      Function Name: restart
      Purpose: to restart a new game
      Parameters: None
+     Return Value: None
      Local Variables: None
      Algorithm: Free resources and run start()
      Assistance Received: none
@@ -84,6 +89,7 @@ private:
      Parameters:
          name, stirng for the human name
          score, integer for tournament score from the user
+     Return Value: None
      Local Variables: None
      Assistance Received: none
      ********************************************************************* */
@@ -94,6 +100,7 @@ private:
      Purpose: To load a saved game from file
      Parameters:
          playerName, name of the human player for the game
+     Return Value: None
      Local Variables:
          game, ifstream to read from file
          line, string to read lines from file
