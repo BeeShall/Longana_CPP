@@ -15,23 +15,23 @@ Player::~Player(){
     delete hand;
 }
 
-int Player::getNumberOfTilesInHand() const{
+int Player::getNumberOfTilesInHand() {
     return hand->getNumberOfTileInHand();
 }
 
-Tile Player::getTilefromHand(int index) const {
+Tile Player::getTilefromHand(int index) {
     return this->hand->getTile(index-1);
 }
 
-int Player::hasTile(Tile tile) const{
+int Player::hasTile(Tile tile){
     return hand->hasTile(tile);
 }
 
-bool Player::isHandEmpty() const {
+bool Player::isHandEmpty() {
     return hand->isEmpty();
 }
 
-int Player::getSumofAllPips() const {
+int Player::getSumofAllPips() {
     return hand->getSumofAllPips();
 }
 
@@ -81,12 +81,28 @@ Move Player::hint(Layout* layout, bool passed){
     cout<<"Strategy:"<<endl;
     
     //find the first single tile
+    //what to do if you the side is ANY
+    //if side is any, first place it on your side and record the move you can make after that
+    //then place it on other side and record the move you can make after that
+    //compare the two moves and place the one yielding greater score
+    //if same place it on the other side to screw the other person over
     for(int i =0; i< moves.size(); i++){
         if(!isTileDouble(moves[i].first)){
-            cout<<"This move is the single tile that decreases the total sum on the hand by "<<moves[i].first.first+moves[i].first.second<<endl;
+            
             return moves[i];
         }
     }
+    
+    for(int i =0; i< moves.size(); i++){
+        if(moves[i].second == ANY){
+            
+        }
+        else{
+            cout<<"This move decreases the total sum on the hand by "<<moves[i].first.first+moves[i].first.second<<endl;
+            return moves[i];
+        }
+    }
+    
     
     //at this point no single tiles available
     //strategy for the double tiles
@@ -114,11 +130,19 @@ vector<Move> Player::getAllPossibleMoves(Layout* layout, bool passed){
     vector<Move> moves;
     for(int i =0 ; i < hand->getNumberOfTileInHand(); i++){
         Tile tile = hand->getTile(i);
-        if(isTileDouble(tile)) moves.push_back({tile,ANY});
-        else{
-            if(layout->canTileBePlaced({tile, side})) moves.push_back({tile,side});
-            else{
-                if(passed && layout->canTileBePlaced({tile, otherSide})) moves.push_back({tile,otherSide});
+        
+        //for doubles or single, send which side can it be placed, left right or any
+        Move move = EMPTY_MOVE;
+        //if the move can be placed on the side, then set it
+        if(layout->canTileBePlaced({tile, side})) move = {tile,side};
+        //if its passed or double you can put on the other side if its valid
+        if(passed || isTileDouble(tile)){
+            //if its valid
+            if(layout->canTileBePlaced({tile, otherSide})){
+                //if it can already be placed on the side, set the side a any
+                if(move.second == side) move.second = ANY;
+                //else set the side to otherside
+                else move.second = otherSide;
             }
         }
         

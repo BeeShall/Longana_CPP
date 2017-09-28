@@ -63,6 +63,7 @@ void Hand::displayHand(ostream& os){
         return;
     }
     for(int i=0; i<tiles.size(); i++){
+        if(&os == &cout) cout<<"("<<i+1<<") ";
         os<<tiles[i].first<<"-"<< tiles[i].second << " ";
     }
     os<<endl;

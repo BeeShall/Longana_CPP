@@ -37,7 +37,7 @@ bool Layout::isSideEmpty(Side side){
 
 bool Layout::placeTile(Move move){
     if(engineSet){
-        if(validateMove(move)){
+        if(checkifTileCanBePlaced(move)){
             if(move.second == LEFT){
                 left.push_back(move.first);
                 return true;
@@ -64,9 +64,7 @@ bool Layout::placeTile(Move move){
 
 bool Layout::canTileBePlaced(Move move){
     if(engineSet){
-        if(move.second == LEFT) return checkifTileCanBePlaced(move);
-        else if(move.second == RIGHT) return checkifTileCanBePlaced(move);
-        else return false;
+        return checkifTileCanBePlaced(move);
     }
     else{
         return false;
@@ -129,21 +127,6 @@ void Layout::resetLayout(){
     engineSet = false;
 }
 
-//tile sent by reference because might need to switch the first and second based on spot
-
-bool Layout::validateMove(Move &move){
-    if(isTileDouble(move.first)) return true;
-    if(move.second== LEFT){
-        return checkifTileCanBePlaced(move);
-    }
-    else if(move.second == RIGHT) {
-        return checkifTileCanBePlaced(move);
-    }
-    else{
-        return false;
-    }
-    
-}
 
 bool Layout::checkifTileCanBePlaced(Move &move){
     if(move.second == LEFT){
