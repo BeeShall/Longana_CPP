@@ -77,10 +77,7 @@ void Round::play(){
     determineFirstPlayer();
     
     start();
-    
-    
     if(!saveAndQuit) getRoundScore();
-    
     
 }
 
@@ -198,6 +195,8 @@ void Round::start(){
     }
     cout<<endl;
     cout<<"The round has ended!"<<endl;
+    cout<<endl;
+    //getRoundScore();
 }
 
 /* *********************************************************************
@@ -464,6 +463,7 @@ void Round::getUserMove(){
         }while(move != VALID);
         //reset the passcount because user made the move
         passCount = 0;
+        passed = false;
         
     }
     else{
@@ -524,6 +524,7 @@ void Round::getComputerMove(){
     //if move is valid, place it
     else if(move == VALID){
         cout<<"Computer played "<<computer->getPlayedMove()<<endl;
+        passed = false;
         passCount = 0;
     }
     cout<<"----------------------------------"<<endl;

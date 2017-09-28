@@ -54,11 +54,11 @@ void Player::displayHand(ostream& os){
 }
 
 bool Player::hasMoreMoves(Layout* layout, bool passed){
-    if(hand->hasDoubles()) return true;
     for(int i =0 ; i < hand->getNumberOfTileInHand(); i++){
-        if(layout->canTileBePlaced({hand->getTile(i), side})) return true;
-        if(passed){
-            if(layout->canTileBePlaced({hand->getTile(i), otherSide})) return true;
+        Tile tile =hand->getTile(i);
+        if(layout->canTileBePlaced({tile , side})) return true;
+        if(passed || isTileDouble(tile)){
+            if(layout->canTileBePlaced({tile, otherSide})) return true;
         }
     }
     return false;
@@ -86,44 +86,27 @@ Move Player::hint(Layout* layout, bool passed){
     //then place it on other side and record the move you can make after that
     //compare the two moves and place the one yielding greater score
     //if same place it on the other side to screw the other person over
-    for(int i =0; i< moves.size(); i++){
-        if(!isTileDouble(moves[i].first)){
-            
-            return moves[i];
-        }
-    }
+    Move returnMove = moves[0];
+    cout<<"This move decreases the total sum on the hand by "<<returnMove.first.first + returnMove.first.second<<endl;
     
-    for(int i =0; i< moves.size(); i++){
-        if(moves[i].second == ANY){
-            
+    if(returnMove.second == ANY){
+        cout<<"However, This tile can be placed on either side!"<<endl;
+        int leftPlacementScore = getNextMoveScoreAfterPlacement(layout, {returnMove.first,LEFT});
+        int rightPlacementScore = getNextMoveScoreAfterPlacement(layout, {returnMove.first,RIGHT});
+        if(leftPlacementScore>rightPlacementScore){
+            cout<<"If placed on LEFT, the next best move decreases the total sum on the hand by "<<leftPlacementScore<<" rather than placing on the RIGHT which would decrease by "<<rightPlacementScore<<endl;
+            returnMove.second = LEFT;
+        }
+        else if(leftPlacementScore<rightPlacementScore){
+           cout<<"If placed on RIGHT, the next best move decreases the total sum on the hand by "<<rightPlacementScore<<" rather than placing on the LEFT which would decrease by "<<leftPlacementScore<<endl;
+            returnMove.second = RIGHT;
         }
         else{
-            cout<<"This move decreases the total sum on the hand by "<<moves[i].first.first+moves[i].first.second<<endl;
-            return moves[i];
+          cout<<"The next best move will decreases the total sum on the hand by "<<leftPlacementScore<<" either way, So placing it on the otherSide would create more chances of screwing the opponent over!"<<endl;
+            returnMove.second = otherSide;
         }
     }
-    
-    
-    //at this point no single tiles available
-    //strategy for the double tiles
-    //scan through your hand with every single pip from the double,
-    //if you have a matching pip in your hand for any of the double
-    //return the first matching double
-    
-    cout<<"There are no single tiles that can be placed! So we look for doubles now!"<<endl;
-    
-    for(int i =0; i<moves.size(); i++){
-        if(hand->hasPip(moves[i].first.first)){
-            moves[i].second = side;
-            cout<<"The hand has a tile that can be placed after this double has been placed!"<<endl;
-            return moves[i];
-        }
-    }
-    
-    //play the double with highest heuristic but on the other side
-    moves[0].second = otherSide;
-    cout<<"There are no tiles that can be played in our favor. So, we play the largest sum yielding pip on the other side! "<<endl;
-    return moves[0];
+    return returnMove;
 }
 
 vector<Move> Player::getAllPossibleMoves(Layout* layout, bool passed){
@@ -141,10 +124,12 @@ vector<Move> Player::getAllPossibleMoves(Layout* layout, bool passed){
             if(layout->canTileBePlaced({tile, otherSide})){
                 //if it can already be placed on the side, set the side a any
                 if(move.second == side) move.second = ANY;
-                //else set the side to otherside
-                else move.second = otherSide;
+                //else set the tile and side to otherside
+                else move = {tile,otherSide};
             }
         }
+        
+        if(move.first.first != -1) moves.push_back(move);
         
     }
     return moves;

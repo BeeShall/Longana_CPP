@@ -201,6 +201,21 @@ private:
      Assistance Received: none
      ********************************************************************* */
     vector<Move> getAllPossibleMoves(Layout* layout, bool passed);
+    
+    int getNextMoveScoreAfterPlacement(Layout* layout, Move move){
+        int returnVal = 0;
+        layout->placeTile(move);
+        vector<Move> moves = getAllPossibleMoves(layout, false);
+        if(!moves.empty()){
+            Tile bestTile;
+            if(moves[0].first != move.first) returnVal = moves[0].first.first + moves[0].first.second;
+            else{
+                if(moves.size() > 1) returnVal = moves[1].first.first + moves[1].first.second;
+            }
+            layout->removeLastTile(move.second);
+        }
+        return returnVal;
+    }
 
 };
 

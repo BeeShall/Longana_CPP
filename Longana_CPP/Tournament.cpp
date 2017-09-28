@@ -70,9 +70,8 @@ void Tournament::start(){
             saveToFile(r.getSerializedRoundInfo());
             return;
         }
-        char c;
-        cout<<"Press any key to continue....";
-        cin>>c;
+        cin.ignore();
+        getchar();
     }
     
     //after reaching the tournament score
@@ -97,6 +96,8 @@ void Tournament::load(int roundCount, const vector<string> &roundInfo){
     
     Round r(human,computer, getEnginePipForRound());
     r.load(roundInfo);
+    cin.ignore();
+    getchar();
     
     //If the user wants to quit within the same round as the loaded,
     //this function will not have been ended

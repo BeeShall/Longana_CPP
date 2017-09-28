@@ -44,7 +44,7 @@ inline bool isChoiceYes(char choice){return (choice == 'y' || choice == 'Y');}
 
 static string removeLabel(string line){
     int index = (int)line.find(':');
-    return line.substr(index+1, line.length());
+    return line.substr(index+2, line.length());
 };
 
 inline string getTileString(Tile tile){return to_string(tile.first)+"-"+to_string(tile.second); }

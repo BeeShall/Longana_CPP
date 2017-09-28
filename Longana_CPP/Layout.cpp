@@ -62,6 +62,11 @@ bool Layout::placeTile(Move move){
     }
 }
 
+void Layout::removeLastTile(Side side){
+    if(side == LEFT && !left.empty()) left.pop_back();
+    if(side == RIGHT && !right.empty()) right.pop_back();
+}
+
 bool Layout::canTileBePlaced(Move move){
     if(engineSet){
         return checkifTileCanBePlaced(move);
