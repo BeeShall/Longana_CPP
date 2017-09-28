@@ -77,10 +77,15 @@ Move Player::hint(Layout* layout, bool passed){
         Tile tileB = b.first;
         return (tileA.first+tileA.second) > (tileB.first+tileB.second);
     });
+    cout<<"-----------------------------"<<endl;
+    cout<<"Strategy:"<<endl;
     
     //find the first single tile
     for(int i =0; i< moves.size(); i++){
-        if(!isTileDouble(moves[i].first)) return moves[i];
+        if(!isTileDouble(moves[i].first)){
+            cout<<"This move is the single tile that decreases the total sum on the hand by "<<moves[i].first.first+moves[i].first.second<<endl;
+            return moves[i];
+        }
     }
     
     //at this point no single tiles available
@@ -89,15 +94,19 @@ Move Player::hint(Layout* layout, bool passed){
     //if you have a matching pip in your hand for any of the double
     //return the first matching double
     
+    cout<<"There are no single tiles that can be placed! So we look for doubles now!"<<endl;
+    
     for(int i =0; i<moves.size(); i++){
         if(hand->hasPip(moves[i].first.first)){
             moves[i].second = side;
+            cout<<"The hand has a tile that can be placed after this double has been placed!"<<endl;
             return moves[i];
         }
     }
     
     //play the double with highest heuristic but on the other side
     moves[0].second = otherSide;
+    cout<<"There are no tiles that can be played in our favor. So, we play the largest sum yielding pip on the other side! "<<endl;
     return moves[0];
 }
 
