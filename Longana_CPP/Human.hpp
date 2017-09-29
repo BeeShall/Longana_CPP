@@ -15,85 +15,57 @@
 class Human:public Player{
 public:
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: Human
+     Purpose: Default constructor for Human class
+     Parameters: None
      Assistance Received: none
      ********************************************************************* */
     Human();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: Human
+     Purpose: Constructor for the Human class
+     Parameters: name, string for the user name
      Assistance Received: none
      ********************************************************************* */
     Human(string name);
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: getName
+     Purpose: To get the name of the human player
+     Parameters: None
+     Return Value: string, name of the human player
      Assistance Received: none
      ********************************************************************* */
     inline string getName() {return name;}
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
+     Function Name: play
+     Purpose: To play and make the move for the player
      Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+         tileIndex: index of the tile in hand starting 1, integer
+         side: side the tile is to be placed
+         layout: pointer to the layout of the game
+         passed: boolean to indicate if the previous player passed
+     Return Value: MoveType indicating if the played move is valid. invalid
+     Local Variables: playedTile, to get the tile played played from hand using passed index
      Assistance Received: none
      ********************************************************************* */
     MoveType play(int tileIndex, Side side, Layout* layout, bool passed);
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
+     Function Name: hint
+     Purpose: To get the best possible hint given the game state
      Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+         layout: pointer to layout to check for tile placement,
+         passed: boolean value indicating if the earlier player had passed
+     Return Value: Move containing the hint tile and side
      Assistance Received: none
      ********************************************************************* */
     Move getHint(Layout* layout, bool passed);
 private:
+    
+    //string to store the human player name
     string name;
     
 };
