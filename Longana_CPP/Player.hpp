@@ -144,7 +144,7 @@ public:
     void displayHand(ostream& os);
 
     /* *********************************************************************
-     Function Name: compute
+     Function Name: hasMoreMoves
      Purpose: To calculate the average grade in a class
      Parameters:
          layout: pointer to layout to check for tile placement,
@@ -181,9 +181,11 @@ protected:
      Algorithm:
          1) get all possible valid moves
          2) sort the moves based on their sum (descending order)
-         3) return the first single tile
-         4) If no single, place the first double tile which has a matching single tile from hand with the same pip
-         5) If there is no such tile, place the first double tile on the other side
+         3) get the first tile
+         4) if side is any, first place it on your side and record the move you can make after that
+         5) then place it on other side and record the move you can make after that
+         6) compare the two moves and place the one yielding greater score
+         7) if same place it on the other side to screw the other person over
      Assistance Received: none
      ********************************************************************* */
     Move hint(Layout* layout, bool passed);
@@ -202,20 +204,18 @@ private:
      ********************************************************************* */
     vector<Move> getAllPossibleMoves(Layout* layout, bool passed);
     
-    int getNextMoveScoreAfterPlacement(Layout* layout, Move move){
-        int returnVal = 0;
-        layout->placeTile(move);
-        vector<Move> moves = getAllPossibleMoves(layout, false);
-        if(!moves.empty()){
-            Tile bestTile;
-            if(moves[0].first != move.first) returnVal = moves[0].first.first + moves[0].first.second;
-            else{
-                if(moves.size() > 1) returnVal = moves[1].first.first + moves[1].first.second;
-            }
-            layout->removeLastTile(move.second);
-        }
-        return returnVal;
-    }
+    /* *********************************************************************
+     Function Name: getNextMoveScoreAfterPlacement
+     Purpose: To get the score of the next best move after making the given move
+     Parameters:
+         layout: pointer to layout to check for tile placement,
+         move: Move, move to make
+     Return Value: int, sum of the pip of the best tile yielded after making the move
+     Local Variables: vector<Move> moves, to sotre the possible moves
+         returnVal: to store the best value to return
+     Assistance Received: none
+     ********************************************************************* */
+    int getNextMoveScoreAfterPlacement(Layout* layout, Move move);
 
 };
 
