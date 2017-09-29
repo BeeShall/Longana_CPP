@@ -40,8 +40,8 @@ Round::Round(Player* human, Player* computer, int enginePip){
     this->computer = (Computer*)computer;
     layout = new Layout(Tile(enginePip,enginePip));
     passCount=0;
-    turn = false;
-    passed = false;
+    turn = NULL;
+    passed = NULL;
     saveAndQuit = false;
 }
 
@@ -73,6 +73,10 @@ void Round::play(){
     human->setNewHand(stock->generateHand());
     computer->setNewHand(stock->generateHand());
     printRoundState();
+    
+    saveAndQuit = checkIfSaveAndQuit();
+    
+    if(saveAndQuit) return;
     
     determineFirstPlayer();
     
@@ -108,17 +112,22 @@ void Round::load(const vector<string> &roundInfo){
     //layout
     int leftIndex = (int)roundInfo[7].find('L')+2; //omitting the L and space
     int rightIndex = (int)roundInfo[7].find('R')-1; //omitting the space
+    cout<<"\'"<<roundInfo[7].substr(leftIndex,rightIndex-leftIndex)<<"\'"<<endl;
     vector<Tile> layoutTiles = parsePips(roundInfo[7].substr(leftIndex,rightIndex-leftIndex));
     layout->setLayout(layoutTiles);
     
     vector<Tile> stockTiles = parsePips(roundInfo[9]); //stock
     stock->setStock(stockTiles);
     
-    if((removeLabel(roundInfo[10])).compare("Yes") == 0) passed= true;
-    else passed = false;
-    
-    if((removeLabel(roundInfo[11])).compare("Human") == 0) turn = true; //turn
-    else turn = false;
+    string playerPassed =removeLabel(roundInfo[10]);
+    if(playerPassed == "") determineFirstPlayer();
+    else{
+        if((playerPassed).compare("Yes") == 0) passed= true;
+        else passed = false;
+        
+        if((removeLabel(roundInfo[11])).compare("Human") == 0) turn = true; //turn
+        else turn = false;
+    }
     
     start();
     
@@ -159,15 +168,21 @@ string Round::getSerializedRoundInfo(){
     ss<<endl;
     
     ss<<"Previous Player Passed: ";
-    if(passed) ss<<"Yes";
-    else ss<<"No";
+    if(passed == NULL) ss<<"";
+    else{
+        if(passed) ss<<"Yes";
+        else ss<<"No";
+    }
     
     ss<<endl;
     ss<<endl;
     
     ss<<"Next Player: ";
-    if(turn) ss<<"Human";
-    else ss<<"Computer";
+    if(turn == NULL) ss<<"";
+    else{
+        if(turn) ss<<"Human";
+        else ss<<"Computer";
+    }
     
     return ss.str();
 }
@@ -222,6 +237,8 @@ void Round::determineFirstPlayer(){
         cout<<"Computer drew "<<newTile.first<< " - "<<newTile.second<<endl;
     }
     layout->setEngine();
+    passed = false;
+    
 }
 
 /* *********************************************************************
@@ -235,7 +252,7 @@ bool Round::checkIfPlayerHasEngine(Tile engine){
     int humanIndex = human->hasTile(engine);
     if(humanIndex>=0){
         cout<<((Human*)human)->getName()<<" has the engine! "<<endl;
-        human->play(humanIndex, ENGINE, layout, false);
+        human->play(humanIndex +1, ENGINE, layout, false); //because the index used to play starts from 1
         turn = false; //human will place and computers turn
         return true;
     }
@@ -260,6 +277,7 @@ bool Round::checkIfPlayerHasEngine(Tile engine){
  Assistance Received: none
  ********************************************************************* */
 vector<Tile> Round::parsePips(string pips){
+    if(pips == "") return {};
     vector<Tile> tiles;
     istringstream iss(pips);
     string tileStr = "";
@@ -324,6 +342,8 @@ void Round::printRoundState(){
  Assistance Received: none
  ********************************************************************* */
 void Round::getUserMove(){
+    saveAndQuit = checkIfSaveAndQuit();
+    if(saveAndQuit) return;
     cout<<endl;
     
     cout<<"Human Hand: "<<endl;
@@ -341,22 +361,7 @@ void Round::getUserMove(){
         cout<<"2. Draw from stock"<<endl;
         cout<<"3. Pass"<<endl;
         cout<<"4. Hint Please???"<<endl;
-        cout<<"5. Save and quit"<<endl;
         cin>>choice;
-        
-        if(choice == 5){
-            cout<<"Are you sure you want to save and quit? (Y/N): ";
-            char c;
-            cin>>c;
-            if(isChoiceYes(c)){
-                saveAndQuit = true;
-                return;
-            }
-            else{
-                choice = -1;
-                continue;
-            }
-        }
         
         //chceking if its a valid option for 2 and 3
         if(choice == 2 || choice == 3){
@@ -473,6 +478,8 @@ void Round::getUserMove(){
         cout<<human->getName()<<" has passed! Its computer's trun! "<<endl;
     }
     turn = !turn;
+    saveAndQuit = checkIfSaveAndQuit();
+    
 }
 
 /* *********************************************************************
@@ -532,6 +539,21 @@ void Round::getComputerMove(){
     //switch the turn
     turn = !turn;
     
+}
+
+/* *********************************************************************
+ Function Name: checkIfSaveAndQuit
+ Purpose: To ask the user if they want to save and quit
+ Parameters: None
+ Return Value: boolean, to indicate user choice
+ Assistance Received: none
+ ********************************************************************* */
+bool Round::checkIfSaveAndQuit(){
+    cout<<endl;
+    char c;
+    cout<<"Do you want to save and quit? (Y/N) ";
+    cin>>c;
+    return isChoiceYes(c);
 }
 
 /* *********************************************************************

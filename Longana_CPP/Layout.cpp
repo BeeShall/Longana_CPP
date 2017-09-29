@@ -14,6 +14,8 @@ Layout::Layout(Tile tile){
 }
 
 void Layout::setLayout(vector<Tile> tiles){
+    //if tiles is empty both are empty
+    if(tiles.empty()) return;
     cout<<"Engine: "<<engine.first<< " - "<< engine.second<<endl;
     left.clear();
     int index =0;
@@ -121,7 +123,7 @@ void Layout::displayLayout(ostream& os){
         
     }
     else{
-        cout<<"L   R"<<endl;
+        os<<"L  R"<<endl;
     }
     
 }

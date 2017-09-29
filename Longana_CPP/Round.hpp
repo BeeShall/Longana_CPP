@@ -216,6 +216,15 @@ private:
     void getComputerMove();
     
     /* *********************************************************************
+     Function Name: checkIfSaveAndQuit
+     Purpose: To ask the user if they want to save and quit
+     Parameters: None
+     Return Value: boolean, to indicate user choice
+     Assistance Received: none
+     ********************************************************************* */
+    bool checkIfSaveAndQuit();
+    
+    /* *********************************************************************
      Function Name: getRoundScore
      Purpose: To calculate the round score and the winner
      Parameters: None
