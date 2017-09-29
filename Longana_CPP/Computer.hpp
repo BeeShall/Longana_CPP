@@ -14,72 +14,46 @@
 
 class Computer : public Player{
 public:
-    
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: Computer
+     Purpose: Default constructor for Computer class
+     Parameters: None
      Assistance Received: none
      ********************************************************************* */
     Computer();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: getPlayedMove
+     Purpose: to get the last move played by the computer
+     Parameters: None
+     Return Value: stringified move played by the computer
      Assistance Received: none
      ********************************************************************* */
     inline string getPlayedMove() const{ return playedMove; }
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
+     Function Name: play
+     Purpose: To play and make the move for the computer
      Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+         layout: pointer to the layout of the game
+         passed: boolean to indicate if the previous player passed
+     Return Value: MoveType indicating if the played move is valid. invalid
+     Local Variables: hint, to store the AI generated move using the hint function
      Assistance Received: none
      ********************************************************************* */
     MoveType play(Layout* layout, bool passed);
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: playTile
+     Purpose: to play the tile and remove it from the hanf
+     Parameters: tileIndex, integer, to remove from hand
+     Return Value: None
      Assistance Received: none
      ********************************************************************* */
     void playTile(int tileIndex);
     
 private:
+    //stores the last move played by the computer
     string playedMove;
     
 };

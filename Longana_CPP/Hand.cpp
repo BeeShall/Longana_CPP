@@ -8,18 +8,48 @@
 
 #include "Hand.hpp"
 
-Hand::Hand(){
-    
-}
-
+/* *********************************************************************
+ Function Name: Hand
+ Purpose: Constructor for Hand class
+ Parameters: vector of Tiles, to set the hand with
+ Assistance Received: none
+ ********************************************************************* */
 Hand::Hand(vector<Tile> tiles){
     this->tiles = tiles;
 }
 
+/* *********************************************************************
+ Function Name: hasTile
+ Purpose: To check for existance of a tile in hand and get its index
+ Parameters: Tile to look for
+ Return Value: integer, index of the tile, -1 if doesn't exist
+ Assistance Received: none
+ ********************************************************************* */
+int Hand::hasTile(Tile tile){
+    for(int i=0; i<tiles.size(); i++){
+        if(tiles[i]== tile) return i;
+    }
+    return -1;
+}
+
+/* *********************************************************************
+ Function Name: playTile
+ Purpose: To remove the tile with given index from hand
+ Parameters: index of the tile to remove
+ Return Value: None
+ Assistance Received: none
+ ********************************************************************* */
 void Hand::playTile(int index){
     tiles.erase(tiles.begin()+index);
 }
 
+/* *********************************************************************
+ Function Name: playTile
+ Purpose: To remove the given from hand
+ Parameters: Tile to remove
+ Return Value: None
+ Assistance Received: none
+ ********************************************************************* */
 void Hand::playTile(Tile tile){
     for(int i=0; i<tiles.size(); i++){
         if(tiles[i]==tile){
@@ -29,13 +59,13 @@ void Hand::playTile(Tile tile){
     }
 }
 
-int Hand::hasTile(Tile tile){
-    for(int i=0; i<tiles.size(); i++){
-        if(tiles[i]== tile) return i;
-    }
-    return -1;
-}
-
+/* *********************************************************************
+ Function Name: getSumofAllPips
+ Purpose: To get the sum of all pips from tiles in hand
+ Parameters: None
+ Return Value: integer, sum of all pips
+ Assistance Received: none
+ ********************************************************************* */
 int Hand::getSumofAllPips(){
     int sum = 0;
     for(int i=0; i<tiles.size(); i++){
@@ -44,20 +74,13 @@ int Hand::getSumofAllPips(){
     return sum;
 }
 
-bool Hand::hasDoubles(){
-    for(int i =0; i<tiles.size(); i++){
-        if(isTileDouble(tiles[i])) return true;
-    }
-    return false;
-}
-
-bool Hand::hasPip(int pip){
-    for(int i =0; i<tiles.size(); i++ ){
-        if(tiles[i].first == pip || tiles[i].second == pip) return true;
-    }
-    return false;
-}
-
+/* *********************************************************************
+ Function Name: displayHand
+ Purpose: To print the hand
+ Parameters: stream to print the hand to
+ Return Value: None
+ Assistance Received: none
+ ********************************************************************* */
 void Hand::displayHand(ostream& os){
     if(tiles.empty()){
         return;

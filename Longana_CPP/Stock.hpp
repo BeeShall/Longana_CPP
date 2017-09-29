@@ -14,122 +14,77 @@
 #include <algorithm>
 #include <random>
 
+#define MAX_PIP 6
+#define HAND_SIZE 8
+
 class Stock{
 public:
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: Hand
+     Purpose: Default constructor for Hand class
+     Parameters: None
      Assistance Received: none
      ********************************************************************* */
     Stock();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: setStock
+     Purpose: To set the tiles for the stock
+     Parameters: vector<Tile> containing the tiles for stock
+     Return Value: None
      Assistance Received: none
      ********************************************************************* */
-    void setStock(vector<Tile> tiles);
+    inline void setStock(vector<Tile> tiles) { stock = tiles; };
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: isEmpty
+     Purpose: To check if the stock is empty
+     Parameters: None
+     Return Value: boolean indicating whether the stock is empty
      Assistance Received: none
      ********************************************************************* */
-    inline bool isEmpty() const { return stock.size()==0; }
+    inline bool isEmpty() const { return stock.empty(); }
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: shuffleStock
+     Purpose: To randomly generate the stock
+     Parameters: None
+     Return Value: None
      Assistance Received: none
      ********************************************************************* */
     void shuffleStock();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: generateHand
+     Purpose: To generate a new hand from the stock
+     Parameters: None
+     Return Value: pointer to the newly generated hand
      Assistance Received: none
      ********************************************************************* */
     Hand* generateHand();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: getTileOnTop
+     Purpose: To get the tile on top of boneyard
+     Parameters: None
+     Return Value: Tile, tile on the top of the stock
      Assistance Received: none
      ********************************************************************* */
     Tile getTileOnTop();
     
     /* *********************************************************************
-     Function Name: compute
-     Purpose: To calculate the average grade in a class
-     Parameters:
-     grades[], an array passed by value. It holds individual grades
-     size, an integer. It refers to the number of students in the class
-     Return Value: The average grade in the class, a real value
-     Local Variables:
-     temp[], an integer array used to sort the grades
-     Algorithm:
-     1) Add all the grades
-     2) Divide the sum by the number of students in class to calculate the average
+     Function Name: displayStock
+     Purpose: To print the boneyard
+     Parameters: stream to print the hand to
+     Return Value: None
      Assistance Received: none
      ********************************************************************* */
     void displayStock(ostream &os);
     
 private:
+    
+    //stores the tiles in the stock
     vector<Tile> stock;
     
 };
